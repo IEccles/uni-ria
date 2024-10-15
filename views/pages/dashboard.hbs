@@ -1,0 +1,926 @@
+{{!-- Inspo https://flowbite.com/application-ui/demo/# --}}
+
+<div class="flex flex-col gap-6 mx-auto max-w-[1700px]">
+    <div class="flex gap-6">
+        <h1 id="greeting" class="text-3xl font-semibold">Hello, {{ getUserName }}</h1>
+    </div>
+    <section class="border bg-white rounded-md shadow-sm w-full py-6 px-8 flex flex-col gap-3">
+        <div class="flex justify-between place-items-center">
+            <div class="flex flex-col gap-1">
+                <figure id="sales" class="text-3xl font-semibold">{{currency_symbol}}0.00</figure>
+                <h2 class="text-black/[.6] text-sm">Sales this week</h2>
+            </div>
+            <div class="flex gap-2 place-items-center">
+                <figure id="sales-change"></figure>
+                <svg id="sales-positive" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                    <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>
+                <svg id="sales-negative" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+            </div>
+        </div>
+        <div id="line-chart" class="grow w-full min-h-80"></div>
+        <hr>
+        <div class="flex place-items-center justify-between pt-2">
+            <span class="text-black/[.6]">
+                Last 7 days
+            </span>
+            <a class="text-rooted flex gap-1 place-items-center" href="/">
+                Sales Report
+                <svg class="w-6 h-6 mt-[1px]" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-[1fr,1fr] xl:grid-cols-[1fr,1fr,1fr] gap-6">
+        <div class="border bg-white rounded-md shadow p-6 flex flex-col gap-6">
+            <div class="flex flex-col gap-1">
+                <figure id="orders" class="text-3xl font-semibold">0 orders</figure>
+                <div class="flex justify-between place-items-center">
+                    <h2 class="text-black/[.6] text-sm">Orders today</h2>
+                    <div class="flex gap-2 place-items-center">
+                        <figure id="orders-change"></figure>
+                        <svg id="orders-positive" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                        <svg id="orders-negative" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div id="orders-chart" class="w-full min-h-[320px]"></div>
+            <hr>
+            <div class="flex place-items-center justify-between">
+                <a target="_blank" class="text-black/[.6]" href="https://rooted.co.uk/blog/retail-timing"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg></a>
+                <a class="text-rooted flex gap-1 place-items-center" href="/">
+                    Sales Report
+                    <svg class="w-6 h-6 mt-[1px]" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="border bg-white rounded-md shadow p-6 flex flex-col gap-6">
+            <div class="flex flex-col gap-1">
+                <h2 class="text-3xl font-semibold">Orders by stores</h2>
+                <p class="text-black/[.6] text-sm">Total number of orders this week by stores</p>
+            </div>
+            <div id="stores" class="grow w-full min-h-[320px] pt-2"></div>
+        </div>
+        <div class="border bg-white rounded-md shadow p-6 flex flex-col gap-6">
+            <div class="flex flex-col gap-1">
+                <figure id="new-customers" class="text-3xl font-semibold">0 customers</figure>
+                <div class="flex justify-between place-items-center">
+                    <h2 class="text-black/[.6] text-sm">New customers this week</h2>
+                    <div class="flex gap-2 place-items-center">
+                        <figure id="customers-change"></figure>
+                        <svg id="customers-positive" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                        <svg id="customers-negative" class="hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div id="customers" class="w-full min-h-[320px]"></div>
+            <hr>
+            <div class="flex place-items-center justify-between">
+                <span></span>
+                <a class="text-rooted flex gap-1 place-items-center" href="/">
+                    Customer Report
+                    <svg class="w-6 h-6 mt-[1px]" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="gap-6 grid grid-cols-1 xl:grid-cols-[2fr,1fr]">
+        <div class="border bg-white rounded-md shadow-sm w-full py-6 px-8 flex flex-col gap-3">
+            <div class="flex flex-col gap-1">
+                <h2 class="text-3xl font-semibold">Sales by country</h2>
+                <p class="text-black/[.6] text-sm">Total number of sales ever by country</p>
+            </div>
+            <div class="flex flex-col gap-6">
+                <div id="order-map" class="grow w-full min-h-[32rem]"></div>
+                <div id="order-countries" class="flex flex-col gap-4 ml-2.5"></div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-6">
+            <div class="border bg-white rounded-md shadow-sm w-full py-6 px-8 hidden xl:flex flex-col gap-6">
+                <div class="flex flex-col gap-1">
+                    <figure id="fulfilment" class="text-3xl font-semibold">0 hours</figure>
+                    <h2 class="text-black/[.6] text-sm">Average fulfilment time</h2>
+                </div>
+                <div id="fulfilment-time" class="w-full min-h-[32rem]"></div>
+                <hr>
+                <div class="flex place-items-center justify-between">
+                    <a target="_blank" class="text-black/[.6]" href="https://rooted.co.uk/blog/how-rooted-helps-with-efficiency"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg></a>
+                    <a class="text-rooted flex gap-1 place-items-center" href="/">
+                        Efficiency Report
+                        <svg class="w-6 h-6 mt-[1px]" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src=" https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js "></script>
+
+<script>
+    const preLoadOptions = {
+        text: '',
+        color: '{{systemColour}}',
+        textColor: '#000',
+        maskColor: 'rgba(255, 255, 255, 0.8)',
+        zlevel: 0,
+        fontSize: 12,
+        showSpinner: true,
+        spinnerRadius: 10,
+        lineWidth: 5
+    }
+
+    function showLoading(echart) {
+        echart.showLoading(preLoadOptions);
+    }
+
+    function hideLoading(echart) {
+        echart.hideLoading();
+    }
+
+    class SalesWeek {
+        constructor() {
+            this.figure = document.getElementById('sales');
+
+            this.change = document.getElementById('sales-change');
+            this.changePositive = document.getElementById('sales-positive');
+            this.changeNegative = document.getElementById('sales-negative');
+
+            this.chartEl = document.getElementById('line-chart');
+            this.echart = echarts.init(this.chartEl);
+            showLoading(this.echart);
+        }
+
+        resize() {
+            this.echart.resize();
+        }
+
+        setFigures(data) {
+            this.figure.textContent = formatCurrency(data.sales, '{{currency_code}}');
+            this.change.textContent = `${data.percentage.sales.toFixed(2)}%`;
+
+            if (data.percentage.sales > 0) {
+                this.change.parentElement.classList.add('text-emerald-400');
+                this.changePositive.classList.remove('hidden');
+            } else {
+                this.change.parentElement.classList.add('text-red-400');
+                this.changeNegative.classList.remove('hidden');
+            }
+        }
+
+        setChart(data) {
+            try {
+                this.echart.setOption({
+                    grid: {
+                        left: 90,
+                        top: 30,
+                        right: 80,
+                        bottom: 60
+                    },
+                    legend: {
+                        bottom: 10,
+                        data: ['Total ({{currency_symbol}})', 'Total Orders'],
+                    },
+                    tooltip: {
+                        trigger: "axis"
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: data.days.map(day => `${day.day} (${english_ordinal_suffix(new Date(day.end))})`)
+                    },
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: 'Total ({{currency_symbol}})',
+                            alignTicks: true,
+                            nameGap: 70,
+                            nameLocation: 'middle',
+                            axisLabel: {
+                                formatter: '{{currency_symbol}} {value}',
+                            },
+                        },
+                        {
+                            type: 'value',
+                            name: 'Orders Count',
+                            nameGap: 60,
+                            nameLocation: 'middle',
+                            alignTicks: true,
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'Total ({{currency_symbol}})',
+                            data: data.days.map(day => day.total),
+                            type: 'line',
+                            smooth: true,
+                            yAxisIndex: 0,
+                            color: '{{systemColour}}'
+                        },
+                        {
+                            name: 'Total Orders',
+                            data: data.days.map(day => day.orders),
+                            type: 'line',
+                            smooth: true,
+                            yAxisIndex: 1,
+                            color: hexToComplimentary('{{systemColour}}')
+                        }
+                    ]
+                })
+
+                hideLoading(this.echart);
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    class OrdersToday {
+        constructor() {
+            this.figure = document.getElementById('orders');
+
+            this.change = document.getElementById('orders-change');
+            this.changePositive = document.getElementById('orders-positive');
+            this.changeNegative = document.getElementById('orders-negative');
+
+            this.chartEl = document.getElementById('orders-chart');
+            this.echart = echarts.init(this.chartEl);
+
+            showLoading(this.echart);
+        }
+
+        resize() {
+            this.echart.resize();
+        }
+
+        setFigures(data) {
+            const orderCount = data.orders;
+            this.figure.textContent = orderCount + ' order' + (orderCount > 1 ? 's' : '');
+            this.change.textContent = `${data.percentage.orders.toFixed(2)}%`;
+
+            if (data.percentage.orders > 0) {
+                this.change.parentElement.classList.add('text-emerald-400');
+                this.changePositive.classList.remove('hidden');
+            } else {
+                this.change.parentElement.classList.add('text-red-400');
+                this.changeNegative.classList.remove('hidden');
+            }
+        }
+
+        setChart(data) {
+            try {
+                this.echart.setOption({
+                    grid: {
+                        left: '9px',
+                        top: '30px',
+                        right: '10px',
+                        bottom: '20px'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: [
+                            '00:00',
+                            '01:00',
+                            '02:00',
+                            '03:00',
+                            '04:00',
+                            '05:00',
+                            '06:00',
+                            '07:00',
+                            '08:00',
+                            '09:00',
+                            '10:00',
+                            '11:00',
+                            '12:00',
+                            '13:00',
+                            '14:00',
+                            '15:00',
+                            '16:00',
+                            '17:00',
+                            '18:00',
+                            '19:00',
+                            '20:00',
+                            '21:00',
+                            '22:00',
+                            '23:00',
+                        ]
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisPointer: {
+                            snap: true
+                        }
+                    },
+                    visualMap: {
+                        show: false,
+                        dimension: 0,
+                        pieces: [
+                            {
+                                lte: 6,
+                                color: '{{systemColour}}'
+                            },
+                            {
+                                gt: 6,
+                                lte: 9,
+                                color: hexToComplimentary('{{systemColour}}')
+                            },
+                            {
+                                gt: 9,
+                                lte: 15,
+                                color: '{{systemColour}}'
+                            },
+                            {
+                                gt: 15,
+                                lte: 18,
+                                color: hexToComplimentary('{{systemColour}}')
+                            },
+                            {
+                                gt: 18,
+                                color: '{{systemColour}}'
+                            }
+                        ]
+                    },
+                    series: [
+                        {
+                            name: 'Orders',
+                            type: 'line',
+                            smooth: true,
+                            data: Object.values(data.timeOfDay),
+                            markArea: {
+                                itemStyle: {
+                                    color: addAlpha(hexToComplimentary('{{systemColour}}'), 0.2)
+                                },
+                                data: [
+                                    [
+                                        {
+                                            name: 'Morning Madness',
+                                            xAxis: '06:00'
+                                        },
+                                        {
+                                            xAxis: '09:00'
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            name: 'Afternoon Browse',
+                                            xAxis: '15:00'
+                                        },
+                                        {
+                                            xAxis: '18:00'
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                });
+
+                hideLoading(this.echart)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    class CustomersWeek {
+        constructor() {
+            this.figure = document.getElementById('new-customers');
+
+            this.change = document.getElementById('customers-change');
+            this.changePositive = document.getElementById('customers-positive');
+            this.changeNegative = document.getElementById('customers-negative');
+
+            this.chartEl = document.getElementById('customers');
+            this.echart = echarts.init(this.chartEl);
+
+            showLoading(this.echart);
+        }
+
+        resize() {
+            this.echart.resize();
+        }
+
+        setFigures(data) {
+            const customerCount = Object.values(data.customers).reduce((a, b) => a + b, 0)
+
+            this.figure.textContent = customerCount + ' customer' + (customerCount > 1 ? 's' : '');
+            this.change.textContent = `${data.percentage.customers.toFixed(2)}%`;
+
+            if (data.percentage.customers > 0) {
+                this.change.parentElement.classList.add('text-emerald-400');
+                this.changePositive.classList.remove('hidden');
+            } else {
+                this.change.parentElement.classList.add('text-red-400');
+                this.changeNegative.classList.remove('hidden');
+            }
+        }
+
+        setChart(data) {
+            try {
+                this.echart.setOption({
+                    tooltip: {
+                        trigger: "axis",
+                        formatter: '{b}: {c} new customers',
+                        axisPointer: {
+                            type: 'none'
+                        }
+                    },
+                    grid: {
+                        top: '0px',
+                        left: '0px',
+                        right: '0px',
+                        bottom: '20px',
+                    },
+                    xAxis: {
+                        type: 'category',
+                        showGrid: false,
+                        splitLine: {
+                            show: false
+                        },
+                        data: Object.keys(data.customers)
+                    },
+                    yAxis: {
+                        type: 'value',
+                        showGrid: false,
+                        splitLine: {
+                            show: false
+                        },
+                    },
+                    series: [
+                        {
+                            data: Object.values(data.customers),
+                            type: 'bar',
+                            showBackground: true,
+                            color: '{{systemColour}}',
+                            backgroundStyle: {
+                                color: '#e5e7eb'
+                            }
+                        }
+                    ]
+                });
+
+                hideLoading(this.echart)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    class OrdersMap {
+        constructor() {
+            this.figure = document.getElementById('order-countries')
+            this.chartEl = document.getElementById('order-map');
+            this.echart = echarts.init(this.chartEl);
+
+            showLoading(this.echart);
+        }
+
+        resize() {
+            this.echart.resize();
+        }
+
+        setFigures(data) {
+            const countries = data.countries
+            countries.sort((a, b) => b.value - a.value)
+            const orderCount = countries.reduce((a, b) => a + b.value, 0);
+
+            for (let i = 0; i < countries.length; i++) {
+                const percentage = parsePercentage((countries[i].value / orderCount) * 100).toFixed(0);
+                const name = iso2Name(countries[i].name);
+                const emoji = iso2FlagEmoji(countries[i].name);
+                const value = countries[i].value;
+
+                const country = document.createElement('div');
+                country.classList.add('flex', 'gap-3', 'place-items-center', 'flex-col', 'sm:flex-row', 'items-baseline');
+
+                const span1 = document.createElement('span')
+                span1.classList.add('w-52', 'overflow-hidden', 'overflow-ellipsis', 'whitespace-nowrap')
+                span1.textContent = `${emoji} ${name}`
+                country.appendChild(span1)
+
+                const span2 = document.createElement('span')
+                span2.classList.add('w-full', 'sm:w-auto', 'grow', 'block', 'min-w-64', 'rounded-full', 'bg-gray-200', 'before:block', 'before:h-3', 'before:w-[--progress]', 'before:rounded-full', 'before:bg-rooted')
+                span2.setAttribute('role', 'progressbar')
+                span2.setAttribute('aria-label', 'Loading')
+                span2.setAttribute('aria-valuenow', percentage)
+                span2.style.setProperty('--progress', `${percentage}%`)
+                country.appendChild(span2)
+
+                const span3 = document.createElement('span')
+                span3.classList.add('w-16', 'hidden', 'md:block')
+                span3.textContent = `${percentage}% ${percentage === '0' ? '>' : ''}`
+                country.appendChild(span3)
+
+                this.figure.appendChild(country);
+
+                if (i >= 5) {
+                    break;
+                }
+            }
+        }
+
+        setChart(data) {
+            try {
+                this.echart.setOption({
+                    grid: {
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        bottom: 0
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        showDelay: 0,
+                        transitionDuration: 0.2,
+                        formatter: function (params) {
+                            return `${iso2FlagEmoji(params.name)}&nbsp;&nbsp;${iso2Name(params.name)}</br>${params.value ? `<p><span class="text-black/[0.5]">Orders:&nbsp;</span>${params.value || 0}</p>` : '<span class="text-black/[0.5]">No Data Avaliable</span>'}`;
+                        }
+                    },
+                    visualMap: {
+                        left: 'right',
+                        min: 0,
+                        max: data.max,
+                        inRange: {
+                            color: [
+                                pSBC(0.4, '{{systemColour}}'),
+                                pSBC(0.3, '{{systemColour}}'),
+                                pSBC(0.2, '{{systemColour}}'),
+                                pSBC(0.1, '{{systemColour}}'),
+                                '{{systemColour}}'
+                            ]
+                        },
+                        text: ['High', 'Low'],
+                        calculable: true
+                    },
+                    toolbox: {
+                        show: true,
+                        left: 'left',
+                        top: 'bottom',
+                        feature: {
+                            restore: {},
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'World Orders',
+                            type: 'map',
+                            roam: true,
+                            map: 'world',
+                            emphasis: {
+                                label: {
+                                    show: false
+                                },
+                                itemStyle: {
+                                    color: '{{systemColour}}',
+                                    areaColor: '{{systemColour}}'
+                                },
+                            },
+                            scaleLimit: {
+                                max: 5,
+                                min: 1.25
+                            },
+                            itemStyle: {
+                                color: '#d1d5db',
+                                borderColor: 'white',
+                                borderWidth: 1,
+                                areaColor: '#d1d5db',
+                                areaStyle: {
+                                    color: '#000000'
+                                },
+
+                            },
+                            data: data.countries
+                        }
+                    ]
+                })
+
+                hideLoading(this.echart);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    class FulfilmentAverage {
+        constructor() {
+            this.figure = document.getElementById('new-customers');
+
+            this.chartEl = document.getElementById('fulfilment-time');
+            this.echart = echarts.init(this.chartEl);
+
+            showLoading(this.echart);
+        }
+
+        resize() {
+            this.echart.resize();
+        }
+
+        setFigures(data) {
+            this.figure.textContent = data.average || 0 + ' hour' + (data.average != 1 ? 's' : '')
+        }
+
+        setChart(data) {
+            try {
+                this.echart.setOption({
+                    series: [
+                        {
+                            grid: {
+                                top: '0px',
+                                left: '0px',
+                                right: '0px',
+                                bottom: '0px',
+                            },
+                            itemStyle: {
+                                color: '{{systemColour}}',
+                            },
+                            max: 48,
+                            tooltip: {
+                                formatter: 'The average fulfilment time is {c} hour(s)',
+                            },
+                            splitNumber: 12,
+                            type: 'gauge',
+                            progress: {
+                                color: '{{systemColour}}',
+                                show: true,
+                                width: 12
+                            },
+                            axisLine: {
+                                color: '{{systemColour}}',
+                                lineStyle: {
+                                    width: 15
+                                }
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            splitLine: {
+                                length: 10,
+                                lineStyle: {
+                                    width: 2,
+                                    color: '#999'
+                                }
+                            },
+                            axisLabel: {
+                                distance: 25,
+                                color: '#999',
+                                fontSize: 15
+                            },
+                            anchor: {
+                                color: '{{systemColour}}',
+                                show: true,
+                                showAbove: true,
+                                size: 15,
+                                itemStyle: {
+                                    borderWidth: 7,
+                                    borderColor: '{{systemColour}}',
+                                }
+                            },
+                            title: {
+                                show: false
+                            },
+                            detail: {
+                                color: '{{systemColour}}',
+                                valueAnimation: true,
+                                fontSize: 30,
+                                offsetCenter: [0, '70%']
+                            },
+                            data: [
+                                {
+                                    value: data.average,
+                                }
+                            ]
+                        }
+                    ]
+                })
+
+                hideLoading(this.echart)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    class StoresWeek {
+        constructor() {
+            this.chartEl = document.getElementById('stores');
+            this.echart = echarts.init(this.chartEl);
+
+            showLoading(this.echart);
+        }
+
+        resize() {
+            this.echart.resize();
+        }
+
+
+        setChart(data) {
+            try {
+                this.echart.setOption({
+                    legend: {
+                        data: ['Orders'],
+                        top: 0,
+                        left: 0
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                    },
+                    radar: [
+                        {
+                            indicator: data.stores.map(store => {
+                                return {
+                                    text: store.name,
+                                    max: store.orders
+                                }
+                            })
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'Stores',
+                            type: 'radar',
+                            data: [
+                                {
+                                    value: data.stores.map(store => {
+                                        return store.orders
+                                    }),
+                                    name: 'Orders',
+                                    itemStyle: {
+                                        color: '{{systemColour}}'
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                });
+
+                hideLoading(this.echart)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    const salesWeek = new SalesWeek();
+    const ordersToday = new OrdersToday();
+    const customersWeek = new CustomersWeek();
+    const ordersMap = new OrdersMap();
+    const fulfilmentAverage = new FulfilmentAverage();
+    const storesWeek = new StoresWeek();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/analytics/api/orders/week')
+            .then(response => response.json())
+            .then(data => {
+                if (data.code !== 200) {
+                    console.error(data);
+                    return;
+                }
+
+                salesWeek.setFigures(data.data);
+                customersWeek.setFigures(data.data);
+                customersWeek.setChart(data.data)
+                storesWeek.setChart(data.data)
+            })
+            .catch(error => console.error(error));
+
+        fetch('/analytics/api/orders/weekly')
+            .then(response => response.json())
+            .then(data => {
+                if (data.code !== 200) {
+                    console.error(data);
+                    return;
+                }
+
+                salesWeek.setChart(data.data);
+            })
+            .catch(error => console.error(error));
+
+        fetch('/analytics/api/orders/day')
+            .then(response => response.json())
+            .then(data => {
+                if (data.code !== 200) {
+                    console.error(data);
+                    return;
+                }
+
+                ordersToday.setFigures(data.data)
+                ordersToday.setChart(data.data)
+            })
+            .catch(error => console.error(error));
+
+        fetch('/assets/js/world.geojson')
+            .then(response => response.json())
+            .then(map => {
+                echarts.registerMap('world', map);
+
+                fetch('/analytics/api/orders/countries')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.code !== 200) {
+                            console.error(data);
+                            return;
+                        }
+
+                        ordersMap.setFigures(data.data);
+                        ordersMap.setChart(data.data);
+                    })
+                    .catch(error => console.log(error))
+            })
+            .catch(error => console.error(error));
+
+        fetch('/analytics/api/orders/fulfilment')
+            .then(response => response.json())
+            .then(data => {
+                if (data.code !== 200) {
+                    console.error(data);
+                    return;
+                }
+
+                fulfilmentAverage.setFigures(data.data);
+                fulfilmentAverage.setChart(data.data);
+            })
+            .catch(error => console.error(error));
+
+        window.addEventListener('resize', function () {
+            salesWeek.resize();
+            ordersToday.resize();
+            customersWeek.resize();
+            ordersMap.resize();
+            fulfilmentAverage.resize();
+            storesWeek.resize();
+        });
+
+        const greetingElement = document.getElementById('greeting');
+        const currentHour = new Date().getHours();
+
+        if (currentHour < 12) {
+            greetingElement.textContent = 'Good Morning, {{ getUserName }}';
+        } else {
+            greetingElement.textContent = 'Good Afternoon, {{ getUserName }}';
+        }
+    })
+</script>

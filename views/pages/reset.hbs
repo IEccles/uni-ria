@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{systemName}} | Password Reset</title>
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <style>
+        .cors-check {visibility: hidden;animation: appear 0.01s forwards;animation-delay: 1.5s;}
+        @keyframes appear {to {visibility: visible} }
+    </style>
+    <div class="cors-check hidden">
+        <p>You are seeing this message for 1 of 4 reasons:</p>
+        <ul style="padding-left: 20px;">
+            <li>The stylsheet hasnt been loaded yet, try refreshing the page.</li>
+            <br>
+            <li>You are accessing {{systemName}} from an unauthorised domain, make sure your connecting from an official domain (https://{{systemDomain}}).</li>
+            <br>
+            <li>You are accessing {{systemName}} from an unsecure connection, make sure you have a https connection.</li>
+            <br>
+            <li>This instance of rooted has not been setup correctly.</li>
+        </ul>
+        <p>*Note that this incident has been logged! ({{uuidv4}})</p>
+    </div>
+
+    <section style="display: none;" class="!flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="w-full mt-[130px] bg-white rounded-lg shadow flex md:mt-0 sm:max-w-md xl:p-0 relative items-center justify-center">
+            <img src="/assets/img/logo.text.webp" class="max-h-[130px] absolute -top-[135px] p-6" alt="{{ systemName }}">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8 w-full">
+                <form class="space-y-4 md:space-y-6">
+                    <h2>Please enter your new password below</h2>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+                        <div class="flex flex-col gap-2">
+                            <input type="password" id="password" class="mt-1 w-full rounded-md px-2 py-1 border border-gray-200 shadow-sm text-md" placeholder="••••••••">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="show_password" class="mt-1">
+                                <label for="show_password" class="cursor-pointer">Show password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="w-full text-rooted-foreground bg-rooted hover:bg-rooted/[.9] focus:ring-4 focus:outline-none focus:ring-rooted font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Reset Password</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form')
+        const password = form.querySelector('#password')
+        const show = form.querySelector('#show_password')
+
+        show.addEventListener('change', () => {
+            if (show.checked && password.type === "password") {
+                password.type = "text"
+            } else {
+                password.type = "password"
+            }
+        })
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const url = window.location.href
+            const token = new URL(url).searchParams.get('token')
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    password: password.value
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()).then((data) => {
+                if (data.code === 200) {
+                    window.location.href = data.data.redirect;
+                } else {
+                    notify.error('Please request a new reset password link', 'Session has expired')
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        })
+    })
+</script>

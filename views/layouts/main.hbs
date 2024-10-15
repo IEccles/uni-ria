@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<noscript>
+    <div class="fixed w-screen h-screen bg-white top-0 left-0 z-[10000]">
+        rooted required you to hve javascript enabled
+    </div>
+</noscript>
+
+<script>
+    {{#if (inProd)}}
+        _ENVIROMENT = 'production';
+        console.log = () => { return; };
+    {{ else }}
+        _ENVIROMENT = 'development';
+        console.log('render uuid: {{uuidv4}}')
+    {{/ if }}
+</script>
+
+{{{body}}}

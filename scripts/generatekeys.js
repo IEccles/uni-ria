@@ -1,0 +1,1 @@
+const { randomBytes } = require('crypto');console.log('Keys:', randomBytes(32).toString('hex'), '\nIV:  ', randomBytes(16).toString('hex'));
