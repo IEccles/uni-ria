@@ -44,20 +44,3 @@ export const isJson = (str) => {
     }
     return true;
 };
-
-export const supportedIntegrations = (type) => {
-
-    const supportedEcom = [['shopify', 'woocommerce', 'magento', 'etsy', 'wayfair', null]];
-    const supportedShipping = [[null]];
-
-    if (type === 'ecom') {
-        return supportedEcom;
-    }
-
-    if (type === 'shipping') {
-        return supportedShipping;
-    }
-
-    return [[]]
-
-}

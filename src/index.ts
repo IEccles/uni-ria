@@ -28,17 +28,6 @@ import sqlStorage from "connect-session-sequelize";
 import db from './database';
 import hbsHelpers from './utils/helpers';
 import router from './router';
-import { syncOrdersJob, karrioJob } from './schedule'; 
-import Karrio from './integrations/karrio';
-
-// These are the model association imports
-
-import Product from './models/product';
-import Stock from './models/stock';
-  
-// Set up associations
-Product.hasMany(Stock, { foreignKey: 'product' });
-Stock.belongsTo(Product, { foreignKey: 'product', as: 'productAlias' });
 
 // This function converts the .env file to environment variables, this is to allow the application to read
 // the environment variables from the .env file and use them in the application. the .env file contains
@@ -48,8 +37,7 @@ Stock.belongsTo(Product, { foreignKey: 'product', as: 'productAlias' });
 dotenv()
 
 const app = express();
-const port = process.env.PORT ?? 8008;
-const karrio = new Karrio();
+const port = process.env.PORT ?? 4004;
 
 app.set('view engine', '.hbs');
 
@@ -260,21 +248,6 @@ db.authenticate().then(async () => {
 
     console.log(`\x1b[32m✔\x1b[0m Connected to database`)
     console.log('\x1b[34m⟳\x1b[0m Starting schedules...')
-
-    try {
-        if (await karrio.authenticate()) {
-            karrio.persistCouriers(await karrio.parseCouriers(await karrio.fetchCouriers()));
-        }
-
-        if (process.env.NODE_ENV === 'production') {
-            await karrioJob.start();
-            await syncOrdersJob.start();
-        }
-
-        console.log(`\x1b[32m✔\x1b[0m Schedules started`)
-    } catch (error) {
-        console.log(`\x1b[31mx\x1b[0m Error starting schedules: ${error}`)
-    }
 
     console.log('\x1b[34m⟳\x1b[0m Starting server...')
 

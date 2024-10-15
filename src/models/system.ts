@@ -76,7 +76,7 @@ model.create({
 
 model.create({
   key: 'currency_iso_4217',
-  description: 'The currency symbol you want to show on Rooted Treasures using the ISO code.',
+  description: 'The currency symbol you want to show on invente using the ISO code.',
   type: 'string',
   value: 'GBP'
 }).catch((e) => {

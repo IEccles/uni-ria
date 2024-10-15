@@ -2,24 +2,19 @@
 
 import { validateEmail, validatePassword } from '../utils/validation';
 import user from '../models/user';
-import tokens from '../utils/tokenStore';
-import Email from '../utils/email';
 import { RequestWithSession } from '../types';
 import express, { Request, Response } from 'express';
-import { verifyToken } from "node-2fa";
 import { config as dotenv } from 'dotenv';
 
 const router = express.Router();
 dotenv();
-
-const tokenStore = new tokens();
 
 // This route is used to redirect the user to the dashboard page, this is the default route for the application
 // and is used to redirect the user to the dashboard page when they visit the root of the application.
 
 router.get('/', (req: RequestWithSession, res: Response) => {
     if (req.session?.user) {
-        return res.redirect('/dashboard');
+        return res.redirect('/dashboard')
     }
     res.redirect('/login');
 });
@@ -83,27 +78,9 @@ router.post('/login', (req: RequestWithSession, res: Response) => {
             return res.status(400).json({code: 400, error: error});
         }
 
-        // Validate the password and 2FA code if 2FA is enabled
-        // - If the password is invalid, return an error message
-        // - If the 2FA code is invalid, return an error message
-        // - If the password and 2FA code are valid, log the user in
-        //   and redirect them to the dashboard page.
-
         user.validatePassword(body.password).then((match: boolean) => {
             if (!match) {
                 return res.status(400).json({code: 400, error: error});
-            }
-
-            if (user.twofa) {
-                if (!body.twofa) {
-                    return res.status(400).json({code: 400, error: '2FA is enabled'});
-                }
-    
-                const twofa = verifyToken(user.twofa, body.twofa);
-    
-                if (!twofa || twofa.delta !== 0) {
-                    return res.status(400).json({code: 400, error: 'Invalid 2FA code'});
-                }
             }
 
             // Check if the user is active before proceeding with the login
@@ -136,150 +113,6 @@ router.post('/login', (req: RequestWithSession, res: Response) => {
 
 router.get('/errors/offline', (req: Request, res: Response) => {
     res.render('errors/offline');
-});
-
-// This route is used to send the user an email with a code which can be used to login if the user has
-// forgotten their password. This will check the email the user has inputted to make sure they are already
-// in the database.
-
-router.post('/forgot', (req: Request, res: Response) => {
-    const email = req.body.email;
-
-    if (!email || email === '') {
-        return res.json({
-            code: 400,
-            error: 'Email is required'
-        });
-    }
-
-    user.findOne({
-        where: {
-            email: email
-        }
-    }).then((user) => {
-        if (user === null) {
-            return res.json({
-                code: 404,
-                error: 'No users found with associated email'
-            });
-        }
-
-        // Generate a unique token
-        const token = tokenStore.generateToken(email);
-
-        const resetLink = `http://${req.headers.host}/reset/${token}`;
-        const template = `
-            <h2>Password Reset Link</h2>
-            <p>Click the link below to reset your password:</p>
-            <a href="${resetLink}">${resetLink}</a>
-        `;
-
-        try {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            Email(email, 'Invente Password Reset', template, 1);
-            return res.json({
-                code: 200,
-                message: 'Password reset link has been sent to your email'
-            });
-        } catch (err) {
-            console.log(err);
-            return res.json({
-                code: 500,
-                error: 'Internal server error'
-            });
-        }
-    }).catch((err) => {
-        console.log(err);
-        return res.json({
-            code: 500,
-            error: 'Internal server error'
-        });
-    });
-});
-
-router.get('/reset/:token', (req: Request, res: Response) => {
-    const email = tokenStore.validateToken(req.params.token);
-    if (!email) {
-        return res.json({
-            code: 400,
-            error: 'Password reset token is invalid or has expired'
-        });
-    }
-
-    // Render a password reset form
-    res.render('pages/reset', { token: req.params.token });
-});
-
-router.post('/reset/:token', (req: Request, res: Response) => {
-    const email = tokenStore.validateToken(req.params.token);
-    if (!email) {
-        return res.json({
-            code: 400,
-            error: 'Password reset token is invalid or has expired'
-        });
-    }
-
-    const password = req.body.password
-
-    if (!password || password === '') {
-        return res.json({
-            code: 400,
-            error: 'Password is required'
-        })
-    }
-
-    // Validate the new password
-    const { pass, details } = validatePassword(req.body.password);
-    if (!pass) {
-        return res.status(400).json({ code: 400, error: 'Invalid password', details });
-    }
-
-    user.findOne({
-        where: {
-            email: email
-        }
-    }).then((user) => {
-        if (!user) {
-            return res.json({
-                code: 404,
-                error: 'No users found with associated email'
-            });
-        }
-
-        const { pass, details } = validatePassword(password);
-
-        if (!pass) {
-            return res.json({
-                code: 400,
-                error: 'Password does not meet the requirements',
-                details: details
-            })
-        }
-
-        user.password = password;
-        user.save().then(() => {
-            tokenStore.deleteToken(req.params.token);
-            return res.json({
-                code: 200,
-                message: 'Password successfully reset',
-                data: {
-                    redirect: '/login'
-                }
-            })
-        }).catch((err) => {
-            console.log(err);
-            return res.json({
-                code: 500,
-                error: 'Internal server error'
-            });
-        })
-    }).catch((err) => {
-        console.log(err);
-        return res.json({
-            code: 500,
-            error: 'Internal server error'
-        });
-    });
 });
 
 
