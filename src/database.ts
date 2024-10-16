@@ -5,7 +5,6 @@ dotenv();
 export const DataTypes = DT;
 
 const database = process.env.db_storage
-const dialect = process.env.db_dialect
 
 // Configure the database connection in sequelize, sequelize is an ORM that is used to 
 // interact with the database currently sequelize supports the following databases:
@@ -15,7 +14,7 @@ const dialect = process.env.db_dialect
 // https://sequelize.org/docs/v6/getting-started/#connecting-to-a-database
 
 const sequelize = new Sequelize({
-  dialect: dialect as 'sqlite',
+  dialect: 'sqlite',
   storage: database,
   logging: false
 });

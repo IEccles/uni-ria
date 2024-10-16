@@ -1,8 +1,6 @@
 // Define the names of the cache and the files to cache
 const CACHE_NAME = 'cache:v3';
 const urlsToCache = [
-    '/assets/img/logo.text.webp',
-    '/assets/img/logo.webp',
     '/assets/css/style.min.css',
 
     'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11/dist/umd/popper.min.js',

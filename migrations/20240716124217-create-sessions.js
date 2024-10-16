@@ -12,7 +12,7 @@ module.exports = {
       sid: {
         type: Sequelize.STRING
       },
-      date: {
+      data: {
         type: Sequelize.STRING
       },
       expires: {

@@ -13,7 +13,7 @@ const Sessions = (sequelize, DataTypes) => {
   }
   Sessions.init({
     sid: DataTypes.STRING,
-    date: DataTypes.TEXT,
+    data: DataTypes.TEXT,
     expires: DataTypes.DATE
   }, {
     sequelize,

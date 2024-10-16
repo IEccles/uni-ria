@@ -132,15 +132,11 @@ app.use(helmet({
                 'data:',
                 process.env.system_domain ?? 'rooted-treasures.co.uk',
                 'www.gravatar.com',
-                'cdn.shopify.com',
             ],
             'connect-src': [
                 '\'self\'',
                 process.env.system_domain ?? 'rooted-treasures.co.uk',
                 'cdn.jsdelivr.net',
-                'https://appcenter.intuit.com',
-                'https://api.xero.com',
-                'https://login.xero.com'
             ],
         },
     }

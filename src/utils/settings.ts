@@ -1,8 +1,6 @@
 import system from '../models/system';
 
 export default async function(key: string | null) {
-    console.log('This is a debugging comment as this file is causing an error', process.env.db_dialect)
-
     if (key === null) {
         return await system.findAll()
     }

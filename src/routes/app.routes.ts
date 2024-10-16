@@ -16,7 +16,7 @@ router.get('/', (req: RequestWithSession, res: Response) => {
     if (req.session?.user) {
         return res.redirect('/dashboard')
     }
-    res.redirect('/login');
+    res.redirect('/dashboard');
 });
 
 // This route is used to render the login page, this page is used to allow the user to login to the application
