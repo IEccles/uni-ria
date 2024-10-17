@@ -70,8 +70,6 @@ export default (e: Express) => {
             return res.redirect(`/login?r=${Buffer.from(url).toString('base64url')}`);
         }
 
-        console.log(req.session.user.id)
-
         Users.findOne({ where: { id: req.session.user.id } }).then((user) => {
             if (!user) {
                 req.session.destroy((err: Error) => {

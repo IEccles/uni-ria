@@ -9,7 +9,6 @@ const router = express.Router();
 // and to allow the user to access the features of the application.
 
 router.get('/', cache('static'), (req: Request, res: Response) => {
-    console.log('do something')
     res.render('pages/dashboard', {titleText: 'Dashboard', layout: 'dashboard.hbs', req});
 });
 
