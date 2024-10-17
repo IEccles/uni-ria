@@ -1,6 +1,6 @@
 # Creating Routes
 
-Now that you have created a model you can now create a route. A route is like an API as the front end will request some data and the backend fetches the data. So essentially this RIA is just one big API as without data there is no RIA.
+Now that you have created a model you can now create a route. A route is like an API as the front end will request some data and the backend fetches the data. So essentially this RIA is just one big API as without data there is no RIA. You can create a route file in the `src/routes` folder and follow the naming convention for example this human route would be called `humans.routes.ts`.
 
 Now enough boring talk lets create some basic routes that we can use to fetch all humans, add a human and fetch a single human.
 
