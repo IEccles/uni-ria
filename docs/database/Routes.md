@@ -91,3 +91,98 @@ We then must check the ID is not `null`, `undefined` or `NaN` so we use `!id` to
 Next we fetch the single human using `findByPk` which means find by primary key which is the ID. We then assign that the variable human and we check that human isn't null. If the human is null we return status 404 as this means we did not find the human in the database. The reason we use `===` instead of `==` is because rather than just checking they match we check the type with the triple equals as well. If the human is not null we return 200 status with the human data that we fetched. 
 
 If we catch an error we return status 500 like before and log the error for debugging.
+
+# Post requests
+
+Now we'll create a post request that will put a new human in the database. To do this we will now be using `router.post`
+
+```ts
+router.post('/api', (req: Request, res: Response) => {
+    const body = req.body;
+
+    if (!body.firstname || body.firstname === '') {
+        return res.status(400).json({
+            code: 400,
+            error: 'Firstname is required'
+        })
+    }
+
+    if (!body.lastname || body.lastname === '') {
+        return res.status(400).json({
+            code: 400,
+            error: 'Last name is required'
+        })
+    }
+
+    if (!body.email || body.email === '') {
+        return res.status(400).json({
+            code: 400,
+            error: 'Email is required'
+        })
+    }
+
+    Humans.create(body)
+        .then((human) => {
+            return res.status(200).json({
+                code: 200,
+                data: {
+                    human: human
+                }
+            })
+        }).catch((err) => {
+            console.log(err)
+            return res.status(500).json({
+                code: 500,
+                error: 'Internal server error'
+            })
+        })
+})
+```
+
+Here you can see the `router.post` and we set the route to `/api`. You may think won't this clash with the get that also uses the route `/api` and no because this is a post request so the front end fetch will understand the difference when they specify what type of fetch they are performing.
+
+Post requests contain a body that will have all the data needed for the request and to access it once again it is within the request but this time we are accessing the body so `req.body`. We then check all required data is there that's why there's no check for the middle name as it's not required so we don't care if it's there or not.
+
+We then create the human by accessing the model and using the `.create` Sequelize function and give it the argument of the body. This will work as long as the json tags match the row names. So for example if the body was:
+
+```
+{
+    first_name: 'bob'
+}
+```
+
+This wouldn't work as our row is called firstname so to fix this instead we would create our own object called data and fill it correctly:
+
+```ts
+const data = {
+    firstname: body.first_name
+}
+```
+
+Now the tag matches our row name so there's no conflicts or you could directly input like so:
+
+```ts
+Humans.create({
+    firstname: body.first_name
+})
+```
+
+Once data is inputted we follow the same formula as all the other requests by returning the status 200 with the data we just created. If there is an error we catch it, log it and return it.
+
+# Export the router
+
+Exporting the router is critical otherwise the routes won't work
+
+To do this at the end of the file we add a simple line of code 
+
+`export default router;`
+
+Now that the router is exported we have to include it in our `router.ts` file located in `src`. Once in `router.ts` import it at the top with the other routes.
+
+`import humans from './routes/humans.routes';`
+
+Now that you have done that you must tell our RIA to use it. To do this scroll to the bottom of the page with the `e.use()` functions and at the bottom within the squigly brackets add our human route to it like so:
+
+`e.use('/humans', humans)`
+
+The first argument you can call `/(anything)` as long as humans is imported correctly. Now the frontend can access those backend routes. For example if they wanted to get all humans they would fetch the url `/humans/api`.
