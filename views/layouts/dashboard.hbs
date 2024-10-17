@@ -141,6 +141,48 @@
                             </li>
 
                             <li class="group relative">
+                                <a href="/products"
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Products')}} text-gray-700 bg-gray-100 {{else}}text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if }}">
+                                    <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Products') }}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                    </svg>
+                                    <span class="block md:hidden lg:block">Products</span>
+                                </a>
+                                <span
+                                    class="lg:hidden invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
+                                    Products
+                                </span>
+                            </li>
+
+                            <li class="group relative">
+                                <a href="/myorders"
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'My Orders')}} text-gray-700 bg-gray-100 {{else}} text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if}}">
+                                    <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'My Orders')}}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                                        <path
+                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                        </path>
+                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    </svg>
+                                    <span class="block md:hidden lg:block">My orders</span>
+                                </a>
+                                <span
+                                    class="lg:hidden invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
+                                    My Orders
+                                </span>
+                            </li>
+
+                            {{#if (isUserAdmin)}}
+                            <hr>
+
+                            <li class="group relative">
                                 <a href="/orders"
                                     class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Orders')}} text-gray-700 bg-gray-100 {{else}}text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if }}">
                                     <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Orders') }}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -178,7 +220,7 @@
                                     Inventory
                                 </span>
                             </li>
-
+                            {{/if}}
                         </ul>
                     </div>
 
