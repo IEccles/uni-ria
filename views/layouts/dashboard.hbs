@@ -224,6 +224,25 @@
                         </ul>
                     </div>
 
+                    <div class="absolute inset-x-0 bottom-24 px-4">
+                        <li class="group relative list-none">
+                            <hr class="my-4">
+                        </li>
+
+                        <li class="group relative list-none">
+                            <a href="/account"
+                                class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Account')}} text-gray-700 bg-gray-100 {{else}} text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if}}">
+                                <svg class="w-5 group-hover:text-rooted {{#if (eq titleText 'Account')}}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <span class="block md:hidden lg:block">Account</span>
+                            </a>
+                            <span
+                                class="lg:hidden invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
+                                Account
+                            </span>
+                        </li>
+                    </div>
+
                     <div class="sticky inset-x-0 bottom-0 border-t border-gray-100 group relative">
                         <a href="/account" class="no-underline text-inherit">
                             <div class="flex items-center gap-2 bg-white p-5 px-5 lg:px-8">
