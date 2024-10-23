@@ -11,35 +11,35 @@ module.exports = {
           allowNull:false,
           autoIncrement:true,
           primaryKey:true,
-          type:sequelize.INTEGER
+          type:Sequelize.INTEGER
       },
       orderNumber:{
         allowNull:false,
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       },
       customerId:{
         allowNull:false, 
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       },
       total:{
         allowNull:false,
-        type:sequelize.DECIMAL
+        type:Sequelize.FLOAT
       },
       deliveryDate:{
         allowNull:false,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       },
       timeSlot:{
         allowNull:false,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       },
       createdAt:{
         allowNull:false,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       },
       updatedAt:{
         allowNull:false,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       }
     })
   },

@@ -11,27 +11,27 @@ module.exports = {
           allowNull:false,
           autoIncrement:true,
           primaryKey:true,
-          type:sequelize.INTEGER
+          type:Sequelize.INTEGER
       },
       name:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       stockCode:{
         allowNull:false, 
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       },
       productCategory:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       barcode:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       stockCount:{
         allowNull:false,
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       }
     })
   },

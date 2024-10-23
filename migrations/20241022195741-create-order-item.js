@@ -11,27 +11,27 @@ module.exports = {
           allowNull:false,
           autoIncrement:true,
           primaryKey:true,
-          type:sequelize.INTEGER
+          type:Sequelize.INTEGER
       },
       orderId:{
         allowNull:false,
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       },
       customerId:{
         allowNull:false, 
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       },
       productId:{
         allowNull:false,
-        type:sequelize.NUMBER
+        type:Sequelize.NUMBER
       },
       shippingDate:{
         allowNull:false,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       },
       trackingNumber:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       }
     })
   },

@@ -1,1 +1,18 @@
-Hello there
+<div>
+    <h2 id="greeting" class="font-semibold text-2xl">Hello, {{ getUserName }}</h2>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const greetingElement = document.getElementById('greeting');
+        const currentHour = new Date().getHours();
+
+        if (currentHour < 12) {
+            greetingElement.textContent = 'Good morning, {{ getUserName }}';
+        } else if (currentHour < 18) {
+            greetingElement.textContent = 'Good afternoon, {{ getUserName }}';
+        } else {
+            greetingElement.textContent = 'Good evening, {{ getUserName }}';
+        }
+    });
+</script>
