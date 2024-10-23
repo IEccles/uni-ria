@@ -6,18 +6,24 @@ const sequelize = require('sequelize');
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Customers', {
+      id: {
+        allowNull:false,
+        autoIncrement:true,
+        primaryKey:true,
+        type:Sequelize.INTEGER
+      },
       firstName: {
           allowNull:false,
-          type:sequelize.STRING
+          type:Sequelize.STRING
       },
       surname:{
           allowNull:false,
-          type:sequelize.STRING
+          type:Sequelize.STRING
       },
       email:{
           allowNull:false,
-          primaryKey:true, 
-          type:sequelize.STRING
+          unique:true, 
+          type:Sequelize.STRING
       },
       password:{
         allowNull:false,
@@ -25,43 +31,43 @@ module.exports = {
       },
       mobile:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       homePhone:{
         allowNull:true,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       addressLine1:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       addressLine2:{
         allowNull:true,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       county:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       postCode:{
         allowNull:false,
-        type:sequelize.STRING
+        type:Sequelize.STRING
       },
       createdAt: {
         allowNull:false,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: sequelize.DATE
+        type: Sequelize.DATE
       },
       lastOrderedDate:{
         allowNull:true,
-        type:sequelize.DATE
+        type:Sequelize.DATE
       },
       membershipStatus:{
         allowNull:false,
-        type:sequelize.BOOLEAN
+        type:Sequelize.BOOLEAN
       }
     })
   },
