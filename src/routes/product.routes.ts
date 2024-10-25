@@ -3,8 +3,13 @@
 import { validateEmail } from '../utils/validation';
 import Products from '../models/product';
 import express, { Request, Response } from 'express';
+import { cache } from '../utils/middleware';
 
 const router = express.Router();
+
+router.get('/', cache('dynamic'), (req: Request, res: Response) => {
+    res.render('pages/product', { titleText: 'Products', layout: 'dashboard.hbs', req });
+});
 
 router.get('/api', (req: Request, res: Response) => {
     Products.findAll()

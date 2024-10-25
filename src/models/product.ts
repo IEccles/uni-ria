@@ -18,10 +18,6 @@ const Products = (sequelize, DataTypes) => {
     }
 
     Products.init({
-        id:{
-            allowNull:false,
-            type: DataTypes.INTEGER
-        },
         name: {
             allowNull: false,
             type: DataTypes.STRING
@@ -44,7 +40,7 @@ const Products = (sequelize, DataTypes) => {
         },
         price: {
             allowNull:false,
-            type: DataTypes.FloatDataType
+            type: DataTypes.FLOAT
         }
     }, {
         sequelize,
