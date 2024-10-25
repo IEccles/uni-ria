@@ -9,6 +9,7 @@ import Users from './models/user';
 import app from './routes/app.routes';
 import dashboard from './routes/dashboard.routes';
 import utils from './routes/utils.routes';
+import customers from './routes/customer.routes';
 
 
 // Load the favicon from the disk and store it in memory to reduce the number of disk reads
@@ -95,4 +96,5 @@ export default (e: Express) => {
 
     e.use('/utils', utils);
     e.use('/dashboard', dashboard);
+    e.use('/customer', customers);
 }
