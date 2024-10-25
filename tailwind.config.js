@@ -18,7 +18,7 @@ function hex_inverse_bw(hex) {
   return (luminance < 140) ? "#ffffff" : "#000000";
 }
 
-const rooted_treasures = process.env.system_colour || "#29e810"
+const rooted_treasures = process.env.system_colour || "#63ae43"
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -28,6 +28,7 @@ module.exports = {
     extend: {
       colors: {
         'rooted': rooted_treasures,
+        'rooted-secondary': "#62370e",
         'rooted-lighter': Color(rooted_treasures).lighten(0.5).rgb().string(),
         'rooted-foreground': hex_inverse_bw(rooted_treasures)
       }
