@@ -19,6 +19,10 @@ const Orders = (sequelize, DataTypes) => {
     }
 
     Orders.init({
+        id:{
+            allowNull:false,
+            type: DataTypes.INTEGER
+        },
         orderNumber: {
             allowNull: false,
             type: DataTypes.FLOAT
