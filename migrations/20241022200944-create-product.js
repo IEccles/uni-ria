@@ -35,7 +35,7 @@ module.exports = {
       },
       price:{
         allowNull:false,
-        type:sequelize.NUMBER
+        type:sequelize.FLOAT
       }
     })
   },
