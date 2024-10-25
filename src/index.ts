@@ -115,7 +115,8 @@ app.use(helmet({
             'default-src': [
                 '\'self\'',
                 process.env.system_domain ?? 'rooted-treasures.co.uk',
-                'cdn.jsdelivr.net'
+                'cdn.jsdelivr.net',
+                'www.imdb.com'
             ],
             'script-src': [
                 'data:',
@@ -125,18 +126,21 @@ app.use(helmet({
                 "'unsafe-eval'",
                 'cdn.jsdelivr.net',
                 'cdnjs.cloudflare.com',
-                'ajax.googleapis.com'
+                'ajax.googleapis.com',
+                'www.imdb.com'
             ],
             'img-src': [
                 '\'self\'',
                 'data:',
                 process.env.system_domain ?? 'rooted-treasures.co.uk',
                 'www.gravatar.com',
+                'www.imdb.com'
             ],
             'connect-src': [
                 '\'self\'',
                 process.env.system_domain ?? 'rooted-treasures.co.uk',
                 'cdn.jsdelivr.net',
+                'www.imdb.com'
             ],
         },
     }
