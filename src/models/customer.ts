@@ -1,6 +1,6 @@
 'use strict';
 
-import { Model } from 'sequelize';
+import { Model, Sequelize } from 'sequelize';
 import sequelize, { DataTypes } from '../database';
 import { validatePassword } from '../utils/validation';
 import bcrypt from 'bcrypt';
@@ -9,7 +9,7 @@ const Customer = (sequelize, DataTypes) => {
   class Customer extends Model {
 
     firstName: string;
-    Surnace: string;
+    surname: string;
     email: string;
     password:string;
     mobile: string;
@@ -36,7 +36,7 @@ const Customer = (sequelize, DataTypes) => {
         return await bcrypt.compare(password, this.password);
     }
   }
-  Customer.init({ 
+  Customer.init({
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -61,10 +61,39 @@ const Customer = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      lastName: {
+      surname: {
         type: DataTypes.STRING,
         allowNull: false
       },
+      mobile: {
+        type: DataTypes.STRING
+      },
+      homePhome: {
+        type: DataTypes.STRING
+      },
+      addressLine1: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      addressLine2: {
+        type: DataTypes.STRING
+      },
+      county: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      postCode: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
+      lastOrderedDate: {
+        type: DataTypes.DATE
+      },
+      membershipStatus: {
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
   }, {
     hooks: {
         beforeCreate: async (customer) => {
