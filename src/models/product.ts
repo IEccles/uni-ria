@@ -1,6 +1,6 @@
 'use strict';
 
-import { Model } from 'sequelize';
+import { DecimalDataType, Model } from 'sequelize';
 import sequelize, { DataTypes } from '../database';
 import { config as dotenv } from 'dotenv';
 
@@ -14,6 +14,7 @@ const Products = (sequelize, DataTypes) => {
         productCategory: string;
         barcodeNumber:string;
         stockCount: number;
+        price:DecimalDataType
     }
 
     Products.init({
@@ -40,6 +41,10 @@ const Products = (sequelize, DataTypes) => {
         stockCount: {
             allowNull: false,
             type: DataTypes.INTEGER
+        },
+        price: {
+            allowNull:false,
+            type: DataTypes.DecimalDataType
         }
     }, {
         sequelize,
