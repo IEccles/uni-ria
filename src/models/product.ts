@@ -12,7 +12,7 @@ const Products = (sequelize, DataTypes) => {
         name: string;
         stockCode: number;
         productCategory: string;
-        barcodeNumber:string;
+        barcode:string;
         stockCount: number;
         price:FloatDataType
     }
@@ -30,7 +30,7 @@ const Products = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.STRING
         },
-        barcodeNumber: {
+        barcode: {
             allowNull: false,
             type: DataTypes.STRING
         },

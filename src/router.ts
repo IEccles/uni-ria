@@ -12,6 +12,7 @@ import utils from './routes/utils.routes';
 import customers from './routes/customer.routes';
 import products from './routes/product.routes';
 import myOrders from './routes/myorders.routes';
+import inventory from './routes/inventory.routes';
 
 
 // Load the favicon from the disk and store it in memory to reduce the number of disk reads
@@ -101,4 +102,5 @@ export default (e: Express) => {
     e.use('/customer', customers);
     e.use('/products', products);
     e.use('/myorders', myOrders);
+    e.use('/inventory', inventory);
 }

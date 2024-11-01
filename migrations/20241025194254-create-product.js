@@ -36,6 +36,14 @@ module.exports = {
       price:{
         allowNull:false,
         type:sequelize.FLOAT
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     })
   },
