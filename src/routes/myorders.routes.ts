@@ -10,3 +10,5 @@ const router = express.Router();
 router.get('/', cache('dynamic'), (req: Request, res: Response) => {
     res.render('pages/my_orders', { titleText: 'My Orders', layout: 'dashboard.hbs', req });
 });
+
+export default router;
