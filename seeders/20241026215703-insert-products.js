@@ -5,7 +5,6 @@ module.exports = {
     await queryInterface.bulkInsert('Products', [
       {
         name: 'Secateurs',
-        stockCode: 1001,
         productCategory: 'Tools',
         barcode: '1001010000',
         stockCount: 50,
@@ -13,7 +12,6 @@ module.exports = {
       },
       {
         name: 'Pruner',
-        stockCode: 1002,
         productCategory: 'Tools',
         barcode: '1002010000',
         stockCount: 50,
@@ -21,7 +19,6 @@ module.exports = {
       },
       {
         name: 'Rake',
-        stockCode: 1003,
         productCategory: 'Tools',
         barcode: '1003010000',
         stockCount: 50,
@@ -29,7 +26,6 @@ module.exports = {
       },
       {
         name: 'Hand Trowel',
-        stockCode: 1004,
         productCategory: 'Tools',
         barcode: '1004010000',
         stockCount: 50,
@@ -37,7 +33,6 @@ module.exports = {
       },
       {
         name: 'Yard Brush',
-        stockCode: 1005,
         productCategory: 'Tools',
         barcode: '1005010000',
         stockCount: 50,
@@ -45,7 +40,6 @@ module.exports = {
       },
       {
         name:'Shears',
-        stockCode:1006,
         productCategory: 'Tools',
         barcode: '1006010000',
         stockCount:50,
@@ -53,7 +47,6 @@ module.exports = {
       },
       {
         name:'Grab-N-Lift',
-        stockCode:1007,
         productCategory:'Tools',
         barcode:'1007010000',
         stockCount:50,
@@ -61,7 +54,6 @@ module.exports = {
       },
       {
         name:'Stainless Steel Border Fork',
-        stockCode:1008,
         productCategory:'Tools',
         barcode:'1008010000',
         stockCount:50,
@@ -69,7 +61,6 @@ module.exports = {
       },
       {
         name:'Digging Spade',
-        stockCode:1009,
         productCategory:'Tools',
         barcode:'1009010000',
         stockCount:50,
@@ -77,7 +68,6 @@ module.exports = {
       },
       {
         name:'Leaf Blower',
-        stockCode:1010,
         productCategory:'Tools',
         barcode:'1010010000',
         stockCount:50,
@@ -85,7 +75,6 @@ module.exports = {
       },
       {
         name:'White Cosmos - Snow Puff',
-        stockCode:2001,
         productCategory:'Seeds',
         barcode:'2001010000',
         stockCount:100,
@@ -93,7 +82,6 @@ module.exports = {
       },
       {
         name:'Cornflower - Blue Diadem',
-        stockCode:2002,
         productCategory:'Seeds',
         barcode:'2002010000',
         stockCount:100,
@@ -101,7 +89,6 @@ module.exports = {
       },
       {
         name:'Swan Gourd',
-        stockCode:2003,
         productCategory:'Seeds',
         barcode:'2003010000',
         stockCount:100,
@@ -109,7 +96,6 @@ module.exports = {
       },
       {
         name:'Bronze Dragon Antirrhium',
-        stockCode:2004,
         productCategory:'Seeds',
         barcode:'2004010000',
         stockCount:100,
@@ -117,7 +103,6 @@ module.exports = {
       },
       {
         name:'Mixed Dahlias',
-        stockCode:2005,
         productCategory:'Seeds',
         barcode:'2005010000',
         stockCount:100,
@@ -125,7 +110,6 @@ module.exports = {
       },
       {
         name:'Copper Swirl California Poppy',
-        stockCode:2006,
         productCategory:'Seeds',
         barcode:'2006010000',
         stockCount:100,
@@ -133,7 +117,6 @@ module.exports = {
       },
       {
         name:'Majestic Double Marigold',
-        stockCode:2007,
         productCategory:'Seeds',
         barcode:'2007010000',
         stockCount:100,
@@ -141,7 +124,6 @@ module.exports = {
       },
       {
         name:'Sunshot Gold Sunflower',
-        stockCode:2008,
         productCategory:'Seeds',
         barcode:'2008010000',
         stockCount:100,
@@ -149,7 +131,6 @@ module.exports = {
       },
       {
         name:'Double Cascade Petunia',
-        stockCode:2009,
         productCategory:'Seeds',
         barcode:'2009010000',
         stockCount:100,
@@ -157,7 +138,6 @@ module.exports = {
       },
       {
         name:'Avant-Garde Violet Laurentia',
-        stockCode:2010,
         productCategory:'Seeds',
         barcode:'2010010000',
         stockCount:100,
@@ -165,7 +145,6 @@ module.exports = {
       },
       {
         name:'Single Egg Chair',
-        stockCode:3001,
         productCategory:'Furniture',
         barcode:'3001010000',
         stockCount:5,
@@ -173,7 +152,6 @@ module.exports = {
       },
       {
         name:'Reclining Chair Set',
-        stockCode:3002,
         productCategory:'Furniture',
         barcode:'3002010000',
         stockCount:5,
@@ -181,7 +159,6 @@ module.exports = {
       },
       {
         name:'Turin Bistro Set',
-        stockCode:3003,
         productCategory:'Furniture',
         barcode:'3003010000',
         stockCount:5,
@@ -189,7 +166,6 @@ module.exports = {
       },
       {
         name:'Double Egg Chair',
-        stockCode:3004,
         productCategory:'Furniture',
         barcode:'3004010000',
         stockCount:5,
@@ -197,7 +173,6 @@ module.exports = {
       },
       {
         name:'Bermuda Weave 4 Seat Set',
-        stockCode:3005,
         productCategory:'Furniture',
         barcode:'3005010000',
         stockCount:5,
@@ -205,7 +180,6 @@ module.exports = {
       },
       {
         name:'Montego 6 Seat Set',
-        stockCode:3006,
         productCategory:'Furniture',
         barcode:'3006010000',
         stockCount:5,
@@ -213,7 +187,6 @@ module.exports = {
       },
       {
         name:'Lounger',
-        stockCode:3007,
         productCategory:'Furniture',
         barcode:'3007010000',
         stockCount:5,
@@ -221,7 +194,6 @@ module.exports = {
       },
       {
         name:'Sienna Mini-Modular Seat Set',
-        stockCode:3008,
         productCategory:'Furniture',
         barcode:'3008010000',
         stockCount:5,
@@ -229,7 +201,6 @@ module.exports = {
       },
       {
         name:'Bermuda Corner Fire Pit Set',
-        stockCode:3009,
         productCategory:'Furniture',
         barcode:'3009010000',
         stockCount:5,
@@ -237,7 +208,6 @@ module.exports = {
       },
       {
         name:'Barcelona Lounge Set',
-        stockCode:3010,
         productCategory:'Furniture',
         barcode:'3010010000',
         stockCount:5,
@@ -245,7 +215,6 @@ module.exports = {
       },
       {
         name:'Lavendula',
-        stockCode:4001,
         productCategory:'Plants',
         barcode:'4001010000',
         stockCount:15,
@@ -253,7 +222,6 @@ module.exports = {
       },
       {
         name:'Leylandi Excalibur Gold',
-        stockCode:4002,
         productCategory:'Plants',
         barcode:'4002010000',
         stockCount:15,
@@ -261,7 +229,6 @@ module.exports = {
       },
       {
         name:'Magnolia Stellata',
-        stockCode:4003,
         productCategory:'Plants',
         barcode:'4003010000',
         stockCount:15,
@@ -269,7 +236,6 @@ module.exports = {
       },
       {
         name:'White Viburnum',
-        stockCode:4004,
         productCategory:'Plants',
         barcode:'4004010000',
         stockCount:15,
@@ -277,7 +243,6 @@ module.exports = {
       },
       {
         name:'Rosemary',
-        stockCode:4005,
         productCategory:'Plants',
         barcode:'4005010000',
         stockCount:15,
@@ -285,7 +250,6 @@ module.exports = {
       },
       {
         name:'Hydrangea',
-        stockCode:4006,
         productCategory:'Plants',
         barcode:'4006010000',
         stockCount:15,
@@ -293,7 +257,6 @@ module.exports = {
       },
       {
         name:'Pink Salvia Sensation',
-        stockCode:4007,
         productCategory:'Plants',
         barcode:'4007010000',
         stockCount:15,
@@ -301,7 +264,6 @@ module.exports = {
       },
       {
         name:'Japanese Acer',
-        stockCode:4008,
         productCategory:'Plants',
         barcode:'4008010000',
         stockCount:15,
@@ -309,7 +271,6 @@ module.exports = {
       },
       {
         name:'Sambucas Black Lace',
-        stockCode:4009,
         productCategory:'Plants',
         barcode:'4009010000',
         stockCount:15,
@@ -317,7 +278,6 @@ module.exports = {
       },
       {
         name:'Pink - Purple Foxglove',
-        stockCode:4010,
         productCategory:'Plants',
         barcode:'4010010000',
         stockCount:15,
