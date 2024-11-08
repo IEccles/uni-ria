@@ -13,7 +13,7 @@ const Products = (sequelize, DataTypes) => {
         productCategory: string;
         barcode:string;
         stockCount: number;
-        price: number;
+        price: FloatDataType;
         image: Blob;
     }
 
