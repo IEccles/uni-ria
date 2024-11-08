@@ -1,25 +1,284 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('Customers', [
+      {
+        firstName: 'Alice',
+        surname: 'Smith',
+        email: 'alice.smith@example.com',
+        password: 'password123',
+        mobile: '07123456789',
+        homePhone: '02087654321',
+        addressLine1: '123 Elm Street',
+        addressLine2: 'Apt 1',
+        county: 'Surrey',
+        postCode: 'SM1 1AA',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-01-15'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Bob',
+        surname: 'Johnson',
+        email: 'bob.johnson@example.com',
+        password: 'securepass456',
+        mobile: '07234567890',
+        homePhone: '02076543210',
+        addressLine1: '456 Oak Road',
+        addressLine2: 'Flat B',
+        county: 'Hampshire',
+        postCode: 'GU1 2BB',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-02-10'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Claire',
+        surname: 'Williams',
+        email: 'claire.williams@example.com',
+        password: 'password789',
+        mobile: '07345678901',
+        homePhone: '02065432109',
+        addressLine1: '789 Pine Avenue',
+        addressLine2: 'Suite 3',
+        county: 'Kent',
+        postCode: 'KT1 3CC',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-03-05'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'David',
+        surname: 'Brown',
+        email: 'david.brown@example.com',
+        password: 'passkey001',
+        mobile: '07456789012',
+        homePhone: '02054321098',
+        addressLine1: '10 Maple Lane',
+        addressLine2: '',
+        county: 'Essex',
+        postCode: 'ES1 4DD',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-04-20'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Emma',
+        surname: 'Taylor',
+        email: 'emma.taylor@example.com',
+        password: 'secretpass123',
+        mobile: '07567890123',
+        homePhone: '02043210987',
+        addressLine1: '25 Cedar Street',
+        addressLine2: '',
+        county: 'Sussex',
+        postCode: 'SS1 5EE',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-05-14'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Frank',
+        surname: 'Clark',
+        email: 'frank.clark@example.com',
+        password: 'mypassword456',
+        mobile: '07678901234',
+        homePhone: '02032109876',
+        addressLine1: '101 Birch Road',
+        addressLine2: 'House 2',
+        county: 'London',
+        postCode: 'LN1 6FF',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-06-10'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Grace',
+        surname: 'Lewis',
+        email: 'grace.lewis@example.com',
+        password: 'simplepass789',
+        mobile: '07789012345',
+        homePhone: '02021098765',
+        addressLine1: '112 Spruce Avenue',
+        addressLine2: '',
+        county: 'Devon',
+        postCode: 'DV1 7GG',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-07-01'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Harry',
+        surname: 'Walker',
+        email: 'harry.walker@example.com',
+        password: 'mypassword123',
+        mobile: '07890123456',
+        homePhone: '02010987654',
+        addressLine1: '133 Poplar Way',
+        addressLine2: '',
+        county: 'Cornwall',
+        postCode: 'CR1 8HH',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-07-21'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Ivy',
+        surname: 'Davis',
+        email: 'ivy.davis@example.com',
+        password: 'mysecurepass',
+        mobile: '07901234567',
+        homePhone: '02098765432',
+        addressLine1: '300 Elmwood Ave',
+        addressLine2: 'Unit 5',
+        county: 'Norfolk',
+        postCode: 'NR1 9JJ',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-08-01'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Jack',
+        surname: 'Morris',
+        email: 'jack.morris@example.com',
+        password: 'unique123',
+        mobile: '07123455678',
+        homePhone: '02087654398',
+        addressLine1: '78 Maple Grove',
+        addressLine2: 'Apt 2A',
+        county: 'West Yorkshire',
+        postCode: 'WY2 1BB',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-08-21'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Kara',
+        surname: 'Wilson',
+        email: 'kara.wilson@example.com',
+        password: 'kpass567',
+        mobile: '07234567898',
+        homePhone: '02011112222',
+        addressLine1: '220 Forest Dr',
+        addressLine2: '',
+        county: 'Greater London',
+        postCode: 'GL1 0EE',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-09-10'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Leo',
+        surname: 'Evans',
+        email: 'leo.evans@example.com',
+        password: 'evans456',
+        mobile: '07398765432',
+        homePhone: '02022223333',
+        addressLine1: '99 Pine Ridge',
+        addressLine2: '',
+        county: 'Somerset',
+        postCode: 'SO2 3FF',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-09-15'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Megan',
+        surname: 'White',
+        email: 'megan.white@example.com',
+        password: 'mwhite789',
+        mobile: '07455678912',
+        homePhone: '02033334444',
+        addressLine1: '58 Chestnut Lane',
+        addressLine2: '',
+        county: 'Berkshire',
+        postCode: 'BR3 4GG',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-09-30'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Noah',
+        surname: 'Hall',
+        email: 'noah.hall@example.com',
+        password: 'hallpass123',
+        mobile: '07566789012',
+        homePhone: '02044445555',
+        addressLine1: '77 Cedar Blvd',
+        addressLine2: '',
+        county: 'Hertfordshire',
+        postCode: 'HT5 6HH',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-10-01'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Olivia',
+        surname: 'Scott',
+        email: 'olivia.scott@example.com',
+        password: 'scott456',
+        mobile: '07677890123',
+        homePhone: '02055556666',
+        addressLine1: '45 Poplar St',
+        addressLine2: 'Apt 3',
+        county: 'Lancashire',
+        postCode: 'LA6 7II',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-10-18'),
+        membershipStatus: 'active'
+      },
+      {
+        firstName: 'Paul',
+        surname: 'Green',
+        email: 'paul.green@example.com',
+        password: 'pgreen789',
+        mobile: '07788901234',
+        homePhone: '02066667777',
+        addressLine1: '95 Elmwood Drive',
+        addressLine2: 'Flat B',
+        county: 'Oxfordshire',
+        postCode: 'OX1 9JJ',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-10-19'),
+        membershipStatus: 'inactive'
+      },
+      {
+        firstName: 'Quinn',
+        surname: 'Black',
+        email: 'quinn.black@example.com',
+        password: 'qblack123',
+        mobile: '07899012345',
+        homePhone: '02077778888',
+        addressLine1: '12 Maple Avenue',
+        addressLine2: '',
+        county: 'Shropshire',
+        postCode: 'SP1 8LL',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastOrderedDate: new Date('2024-11-10'),
+        membershipStatus: 'active'
+      }
+    ]);
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Customers', null, {});
   }
 };
