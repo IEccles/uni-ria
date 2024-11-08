@@ -9,11 +9,11 @@ dotenv();
 const Orders = (sequelize, DataTypes) => {
     class Orders extends Model {
         id: number;
-        orderNumber: number;
         customerId: number;
         total: number;
         deliveryDate: Date;
         timeSlot: Date;
+        products: { id: number, qty: number }[];
         createdAt: Date;
         updatedAt: Date;
     }
@@ -22,10 +22,6 @@ const Orders = (sequelize, DataTypes) => {
         id:{
             allowNull:false,
             type: DataTypes.INTEGER
-        },
-        orderNumber: {
-            allowNull: false,
-            type: DataTypes.FLOAT
         },
         customerId: {
             allowNull: false,
@@ -42,6 +38,10 @@ const Orders = (sequelize, DataTypes) => {
         timeSlot: {
             allowNull: false,
             type: DataTypes.DATE
+        },
+        products: {
+            allowNull: false,
+            type: DataTypes.JSON
         }
     }, {
         sequelize,

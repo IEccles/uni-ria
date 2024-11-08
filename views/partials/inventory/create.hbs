@@ -87,7 +87,7 @@
                             <input type="text" id="depth" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md">
                         </div>
                     </div>
-                    <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="grid grid-cols-4 gap-4 mb-4">
                         <div class="flex flex-col">
                             <label for="weight">Weight (grams)</label>
                             <input type="text" id="weight" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md">
@@ -106,7 +106,15 @@
                                 <option value="cardboard">Cardboard</option>
                             </select>
                         </div>
+                        <div class="flex flex-col">
+                            <label for="stock">Stock</label>
+                            <input id="stock" type="text" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] text-black shadow-sm text-md bg-white">
+                        </div>
                     </div>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <button id="submit_btn" type="submit" class="border-2 border-rooted text-rooted-secondary px-4 py-2 bg-rooted hover:bg-rooted-secondary hover:text-rooted hover:border-rooted-secondary">Create</button>
                 </div>
             </div>
         </form>
@@ -121,6 +129,9 @@
                 this.form = this.modal.querySelector('form');
                 this.openBtn = document.getElementById('inventory-create');
                 this.closeBtn = this.form.querySelector('#product-create-close');
+
+                this.modal_title = this.form.querySelector('#modal_title');
+                this.submitBtn = this.form.querySelector('#submit_btn');
 
                 this.open = this.open.bind(this);
                 this.close = this.close.bind(this);
@@ -138,6 +149,20 @@
         open() {
             this.form.reset();
             this.modal.classList.remove('hidden');
+        }
+
+        edit(id) {
+            this.modal_title.textContent = `Edit Product - #${id}`;
+
+            fetch(`/inventory/api/s/${id}`)
+                .then(res => res.json())
+                .then((data) => {
+                    if (data.code === 200) {
+
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                })
         }
 
         init() {

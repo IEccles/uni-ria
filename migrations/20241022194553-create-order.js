@@ -13,10 +13,6 @@ module.exports = {
           primaryKey:true,
           type:Sequelize.INTEGER
       },
-      orderNumber:{
-        allowNull:false,
-        type:Sequelize.NUMBER
-      },
       customerId:{
         allowNull:false, 
         type:Sequelize.NUMBER
@@ -32,6 +28,10 @@ module.exports = {
       timeSlot:{
         allowNull:false,
         type:Sequelize.DATE
+      },
+      products: {
+        allowNull: false,
+        type: Sequelize.JSON
       },
       createdAt:{
         allowNull:false,

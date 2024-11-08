@@ -17,10 +17,6 @@ module.exports = {
         allowNull:false,
         type:Sequelize.STRING
       },
-      stockCode:{
-        allowNull:false, 
-        type:Sequelize.NUMBER
-      },
       productCategory:{
         allowNull:false,
         type:Sequelize.STRING
@@ -36,6 +32,10 @@ module.exports = {
       price:{
         allowNull:false,
         type:sequelize.FLOAT
+      },
+      image: {
+        allowNull: true,
+        type: Sequelize.BLOB('long')
       },
       createdAt: {
         allowNull: false,

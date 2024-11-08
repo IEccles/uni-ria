@@ -10,21 +10,17 @@ const Products = (sequelize, DataTypes) => {
     class Products extends Model {
         id: number;
         name: string;
-        stockCode: number;
         productCategory: string;
         barcode:string;
         stockCount: number;
-        price:FloatDataType
+        price: number;
+        image: Blob;
     }
 
     Products.init({
         name: {
             allowNull: false,
             type: DataTypes.STRING
-        },
-        stockCode: {
-            allowNull: false,
-            type: DataTypes.INTEGER
         },
         productCategory: {
             allowNull: false,
@@ -41,6 +37,10 @@ const Products = (sequelize, DataTypes) => {
         price: {
             allowNull:false,
             type: DataTypes.FLOAT
+        },
+        image: {
+            allowNull: true,
+            type: DataTypes.BLOB
         }
     }, {
         sequelize,
