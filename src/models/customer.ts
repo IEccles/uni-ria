@@ -7,13 +7,12 @@ import bcrypt from 'bcrypt';
 
 const Customer = (sequelize, DataTypes) => {
   class Customer extends Model {
-
     firstName: string;
     surname: string;
     email: string;
     password:string;
     mobile: string;
-    homePhome: string;
+    homePhone: string;
     addressLine1: string;
     addressLine2: string;
     county: string;
@@ -21,7 +20,7 @@ const Customer = (sequelize, DataTypes) => {
     createdAt:Date;
     updatedAt: Date;
     lastOrderedDate:Date;
-    membershipStatus:boolean;
+    membershipStatus:number;
 
     /**
      * Helper method for defining associations.
@@ -68,7 +67,7 @@ const Customer = (sequelize, DataTypes) => {
       mobile: {
         type: DataTypes.STRING
       },
-      homePhome: {
+      homePhone: {
         type: DataTypes.STRING
       },
       addressLine1: {
@@ -91,8 +90,8 @@ const Customer = (sequelize, DataTypes) => {
       },
       membershipStatus: {
         allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+        type: DataTypes.TINYINT,
+        defaultValue: 0
       }
   }, {
     hooks: {

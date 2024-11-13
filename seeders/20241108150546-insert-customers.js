@@ -2,12 +2,13 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Customers', [
+    try {
+      await queryInterface.bulkInsert('Customers', [
       {
         firstName: 'Alice',
         surname: 'Smith',
         email: 'alice.smith@example.com',
-        password: 'password123',
+        password: 'Password123',
         mobile: '07123456789',
         homePhone: '02087654321',
         addressLine1: '123 Elm Street',
@@ -17,13 +18,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-01-15'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Bob',
         surname: 'Johnson',
         email: 'bob.johnson@example.com',
-        password: 'securepass456',
+        password: 'Securepass456',
         mobile: '07234567890',
         homePhone: '02076543210',
         addressLine1: '456 Oak Road',
@@ -33,13 +34,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-02-10'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Claire',
         surname: 'Williams',
         email: 'claire.williams@example.com',
-        password: 'password789',
+        password: 'Password789',
         mobile: '07345678901',
         homePhone: '02065432109',
         addressLine1: '789 Pine Avenue',
@@ -49,13 +50,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-03-05'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'David',
         surname: 'Brown',
         email: 'david.brown@example.com',
-        password: 'passkey001',
+        password: 'Passkey001',
         mobile: '07456789012',
         homePhone: '02054321098',
         addressLine1: '10 Maple Lane',
@@ -65,13 +66,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-04-20'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Emma',
         surname: 'Taylor',
         email: 'emma.taylor@example.com',
-        password: 'secretpass123',
+        password: 'Secretpass123',
         mobile: '07567890123',
         homePhone: '02043210987',
         addressLine1: '25 Cedar Street',
@@ -81,13 +82,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-05-14'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Frank',
         surname: 'Clark',
         email: 'frank.clark@example.com',
-        password: 'mypassword456',
+        password: 'Mypassword456',
         mobile: '07678901234',
         homePhone: '02032109876',
         addressLine1: '101 Birch Road',
@@ -97,13 +98,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-06-10'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Grace',
         surname: 'Lewis',
         email: 'grace.lewis@example.com',
-        password: 'simplepass789',
+        password: 'Simplepass789',
         mobile: '07789012345',
         homePhone: '02021098765',
         addressLine1: '112 Spruce Avenue',
@@ -113,13 +114,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-07-01'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Harry',
         surname: 'Walker',
         email: 'harry.walker@example.com',
-        password: 'mypassword123',
+        password: 'Mypassword123',
         mobile: '07890123456',
         homePhone: '02010987654',
         addressLine1: '133 Poplar Way',
@@ -129,13 +130,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-07-21'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Ivy',
         surname: 'Davis',
         email: 'ivy.davis@example.com',
-        password: 'mysecurepass',
+        password: 'Mysecurepass',
         mobile: '07901234567',
         homePhone: '02098765432',
         addressLine1: '300 Elmwood Ave',
@@ -145,13 +146,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-08-01'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Jack',
         surname: 'Morris',
         email: 'jack.morris@example.com',
-        password: 'unique123',
+        password: 'Unique123',
         mobile: '07123455678',
         homePhone: '02087654398',
         addressLine1: '78 Maple Grove',
@@ -161,13 +162,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-08-21'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Kara',
         surname: 'Wilson',
         email: 'kara.wilson@example.com',
-        password: 'kpass567',
+        password: 'Kpass567',
         mobile: '07234567898',
         homePhone: '02011112222',
         addressLine1: '220 Forest Dr',
@@ -177,13 +178,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-09-10'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Leo',
         surname: 'Evans',
         email: 'leo.evans@example.com',
-        password: 'evans456',
+        password: 'Evans456',
         mobile: '07398765432',
         homePhone: '02022223333',
         addressLine1: '99 Pine Ridge',
@@ -193,13 +194,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-09-15'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Megan',
         surname: 'White',
         email: 'megan.white@example.com',
-        password: 'mwhite789',
+        password: 'Mwhite789',
         mobile: '07455678912',
         homePhone: '02033334444',
         addressLine1: '58 Chestnut Lane',
@@ -209,13 +210,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-09-30'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Noah',
         surname: 'Hall',
         email: 'noah.hall@example.com',
-        password: 'hallpass123',
+        password: 'Hallpass123',
         mobile: '07566789012',
         homePhone: '02044445555',
         addressLine1: '77 Cedar Blvd',
@@ -225,13 +226,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-10-01'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Olivia',
         surname: 'Scott',
         email: 'olivia.scott@example.com',
-        password: 'scott456',
+        password: 'Scott456',
         mobile: '07677890123',
         homePhone: '02055556666',
         addressLine1: '45 Poplar St',
@@ -241,13 +242,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-10-18'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       },
       {
         firstName: 'Paul',
         surname: 'Green',
         email: 'paul.green@example.com',
-        password: 'pgreen789',
+        password: 'pgreEn789',
         mobile: '07788901234',
         homePhone: '02066667777',
         addressLine1: '95 Elmwood Drive',
@@ -257,13 +258,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-10-19'),
-        membershipStatus: 'inactive'
+        membershipStatus: 0
       },
       {
         firstName: 'Quinn',
         surname: 'Black',
         email: 'quinn.black@example.com',
-        password: 'qblack123',
+        password: 'qblaCk123',
         mobile: '07899012345',
         homePhone: '02077778888',
         addressLine1: '12 Maple Avenue',
@@ -273,12 +274,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         lastOrderedDate: new Date('2024-11-10'),
-        membershipStatus: 'active'
+        membershipStatus: 1
       }
     ]);
-  },
-
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Customers', null, {});
+  } catch (error) {
+    console.error('Error during seeding:', error);
   }
+},
+
+async down(queryInterface, Sequelize) {
+  await queryInterface.bulkDelete('Customers', null, {});
+}
 };
