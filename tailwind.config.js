@@ -39,5 +39,11 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [],
+  theme: {
+    fontFamily: {
+      'rooted-treasures-headings': "Monotype Corvisa",
+      'rooted-treasures-body': "Centruy"
+    }
+  }
 };
