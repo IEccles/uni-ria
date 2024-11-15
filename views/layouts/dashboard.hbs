@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{!-- Adding the Logo into the Page Design - want it to be in a Container with the Company Name. According to Design, needs to be present in the Nav Bar Container --}}
+    {{!-- Want to create a container/ --}}
+    {{!-- <div>
+        <img src="/assets/img/rooted_treasures_logo.text.webp.png" class="w-32 h-32">
+    </div> --}}
+    
     <title>{{ systemName }} | {{ titleText }}</title>
 
     <script>
@@ -117,15 +124,18 @@
         <div class="hidden md:block fixed md:static z-20">
             <nav class="flex relative w-fit h-full" id="sidebar">
                 <div
-                    class="flex h-screen flex-col justify-between border-e bg-white w-72 md:w-[5.5rem] lg:w-72 z-10">
+                    class="flex h-screen flex-col justify-between border-e bg-rooted-brown w-72 md:w-[5.5rem] lg:w-72 z-10">
                     <div class="px-4 py-6">
+                        <div class="flex">
+                            <img src="/assets/img/rooted_treasures_logo.text.webp.png" class="w-32 h-32 font-family: " >
+                        </div>
                         <span class="flex place-content-center rounded-md h-[48.03px] lg:h-[51.68px]">
                         </span>
 
-                        <ul class="mt-6 space-y-1">
+                        <ul class="space-y-1 bg-rooted-secondary">
                             <li class="group relative">
                                 <a href="/dashboard"
-                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Dashboard') }} text-gray-700 bg-gray-100 {{else}}text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if }}">
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Dashboard') }} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
                                     <svg class="w-5 group-hover:text-rooted {{#if (eq titleText 'Dashboard') }}text-rooted{{/if }}" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -142,7 +152,7 @@
 
                             <li class="group relative">
                                 <a href="/products"
-                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Products')}} text-gray-700 bg-gray-100 {{else}}text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if }}">
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Products')}} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
                                     <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Products') }}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -160,7 +170,7 @@
 
                             <li class="group relative">
                                 <a href="/myorders"
-                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'My Orders')}} text-gray-700 bg-gray-100 {{else}} text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if}}">
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'My Orders')}}text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
                                     <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'My Orders')}}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -184,7 +194,7 @@
 
                             <li class="group relative">
                                 <a href="/orders"
-                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Orders')}} text-gray-700 bg-gray-100 {{else}}text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if }}">
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Orders')}} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
                                     <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Orders') }}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -202,7 +212,7 @@
 
                             <li class="group relative">
                                 <a href="/inventory"
-                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Inventory')}} text-gray-700 bg-gray-100 {{else}} text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if}}">
+                                    class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Inventory')}} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
                                     <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Inventory')}}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -231,7 +241,7 @@
 
                         <li class="group relative list-none">
                             <a href="/account"
-                                class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Account')}} text-gray-700 bg-gray-100 {{else}} text-gray-500 hover:bg-gray-100 hover:text-gray-700{{/if}}">
+                                class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Account')}} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
                                 <svg class="w-5 group-hover:text-rooted {{#if (eq titleText 'Account')}}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 <span class="block md:hidden lg:block">Account</span>
