@@ -104,9 +104,9 @@ function isJson(str: string) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const cache = (type: string): any => {
 
-    return (_: Request, __: Response, next: NextFunction) => {
-        next();
-    }
+    // return (_: Request, __: Response, next: NextFunction) => {
+    //     next();
+    // }
 
     // If the cache is disabled, the middleware will just call the next function
     // without storing the cache in the file system or reading it from the file system
