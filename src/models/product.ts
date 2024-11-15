@@ -10,6 +10,7 @@ const Products = (sequelize, DataTypes) => {
     class Products extends Model {
         id: number;
         name: string;
+        description: string;
         productCategory: string;
         barcode:string;
         stockCount: number;
@@ -20,6 +21,10 @@ const Products = (sequelize, DataTypes) => {
     Products.init({
         name: {
             allowNull: false,
+            type: DataTypes.STRING
+        },
+        description: {
+            allowNull: true,
             type: DataTypes.STRING
         },
         productCategory: {
