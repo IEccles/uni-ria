@@ -7,6 +7,7 @@ import Products from '../models/product';
 import express, { Request, Response } from 'express';
 import { cache } from '../utils/middleware';
 import { Op } from 'sequelize';
+import { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from 'puppeteer';
 
 const router = express.Router();
 

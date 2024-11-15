@@ -21,7 +21,8 @@ const Orders = (sequelize, DataTypes) => {
     Orders.init({
         id:{
             allowNull:false,
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            primaryKey: true
         },
         customerId: {
             allowNull: false,
