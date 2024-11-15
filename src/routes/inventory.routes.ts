@@ -4,8 +4,15 @@ import Inventory from '../models/product';
 import { cache } from '../utils/middleware';
 import express, { Request, Response } from 'express';
 import { Op } from 'sequelize';
+import multer from 'multer';
+import { File as MulterFile } from 'multer';
+
+interface MulterRequest extends Request {
+    file: MulterFile
+}
 
 const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', cache('dynamic'), (req: Request, res: Response) => {
     res.render('pages/inventory', { titleText: 'Inventory', layout: 'dashboard.hbs', req });
@@ -96,7 +103,7 @@ router.get('/api/s/:id', cache('dynamic'), (req: Request, res: Response) => {
         })
 });
 
-router.post('/api', cache('dynamic'), (req: Request, res: Response) => {
+router.post('/api', upload.single('image'), (req: MulterRequest, res: Response) => {
     const body = req.body;
 
     if (!body.name || body.name === '' || !body.productCategory || body.productCategory === '' || !body.barcodeNumber || body.barcodeNumber === '' || !body.price || body.price === '') {

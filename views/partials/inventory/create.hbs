@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
+
 <div>
     <button id="inventory-create" class="border-2 bg-white border-invente text-invente hover:bg-invente hover:text-invente-foreground rounded-md p-2">Create Single</button>
 
@@ -57,64 +59,33 @@
                         </div>
                     </div>
                     <label for="description">Description</label>
-                    <textarea id="description" class="border border-[#6b7280] rounded-md h-[190px] min-h-[100px] p-2" placeholder="Enter here"></textarea>
+                    <textarea id="description" class="border border-[#6b7280] rounded-md h-[190px] min-h-[100px] p-2" placeholder="Enter here">
+                        <h1>This is a description</h1>
+                        <p>Description</p>
+                    </textarea>
                 </div>
-                <div class="col-span-2 flex flex-col gap-4">
+                <div class="flex flex-col gap-4">
                     <div class="flex flex-col mb-4">
                         <label for="product-name">Product Name</label>
                         <input type="text" id="product-name" required class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md" placeholder="Enter here">
                     </div>
-                    <div class="grid grid-cols-3 gap-4 mb-4">
-                        <div class="flex flex-col">
-                            <label for="product-price">Product Price</label>
-                            <input type="text" id="product-price" required class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md" placeholder="SKU002">
-                        </div>
-                    </div>
 
-                    <p>Delivery Information</p>
+                    <p>Price and stock</p>
 
-                    <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
                         <div class="flex flex-col">
-                            <label for="width">Width (cm)</label>
-                            <input type="text" id="width" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="height">Height (cm)</label>
-                            <input type="text" id="height" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="depth">Depth (cm)</label>
-                            <input type="text" id="depth" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-4 gap-4 mb-4">
-                        <div class="flex flex-col">
-                            <label for="weight">Weight (grams)</label>
-                            <input type="text" id="weight" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="special-requirements">Special Requirements</label>
-                            <select id="special-requirements" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] text-black shadow-sm text-md bg-white">
-                                <option value="none" disabled selected>Select option</option>
-                                <option value="fragile">Fragile</option>
-                            </select>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="packaging-material">Packaging Material</label>
-                            <select id="packaging-material" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] text-black shadow-sm text-md bg-white">
-                                <option value="none" disabled selected>Select option</option>
-                                <option value="cardboard">Cardboard</option>
-                            </select>
+                            <label for="product-barcode">Product Price</label>
+                            <input type="text" id="product-barcode" required class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] shadow-sm text-md" placeholder="015327">
                         </div>
                         <div class="flex flex-col">
                             <label for="stock">Stock</label>
-                            <input id="stock" type="text" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] text-black shadow-sm text-md bg-white">
+                            <input id="stock" required type="text" class="mt-1 w-full rounded-md px-2 py-1 border border-[#6b7280] text-black shadow-sm text-md bg-white">
                         </div>
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-6">
-                    <button id="submit_btn" type="submit" class="border-2 border-rooted text-rooted-secondary px-4 py-2 bg-rooted hover:bg-rooted-secondary hover:text-rooted hover:border-rooted-secondary">Create</button>
+                    <button id="submit_btn" type="submit" class="border-2 rounded-md border-rooted text-rooted-secondary px-4 py-2 bg-rooted hover:bg-rooted-secondary hover:text-rooted hover:border-rooted-secondary">Create</button>
                 </div>
             </div>
         </form>
@@ -144,6 +115,8 @@
         close() {
             this.modal.classList.add('hidden');
             this.form.reset();
+            this.modal_title.textContent = `Create Product`;
+            this.submitBtn.textContent = 'Create'
         }
 
         open() {
@@ -153,12 +126,20 @@
 
         edit(id) {
             this.modal_title.textContent = `Edit Product - #${id}`;
+            this.submitBtn.textContent = 'Update'
 
             fetch(`/inventory/api/s/${id}`)
                 .then(res => res.json())
                 .then((data) => {
                     if (data.code === 200) {
+                        const product = data.data.product;
 
+                        this.form.querySelector('#product-name').value = data.name
+                        this.form.querySelector('#description').value = data.description
+                        this.form.querySelector('#product-price').value = data.price
+                        this.form.querySelector('#product-barcode').value = data.barcode
+                        this.form.querySelector('#stock').value = data.stockCount
+                        this.form.querySelector('#product-category').value = data.productCategory
                     }
                 }).catch((err) => {
                     console.log(err)
@@ -173,8 +154,70 @@
                     this.close();
                 }
             })
+
+            tinymce.init({
+                selector: 'textarea#description'
+            });
         }
     }
 
     const createProduct = new CreateProduct();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('inventory-create-modal').querySelector('form');
+
+        form.querySelector('#upload-file').addEventListener('click', () => {
+            form.querySelector('#image-upload').click();
+        });
+
+        form.querySelector('#image-upload').addEventListener('change', (e) => {
+            const image = event.target.files[0];
+
+            if (image) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    form.querySelector('#image-preview').src = e.target.result
+                }
+
+                reader.readAsDataURL(image);
+            }
+        });
+
+        form.querySelector('#clear-image').addEventListener('click', () => {
+            form.querySelector('#image-upload').value = '';
+            form.querySelector('#image-preview').src = '';
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const data = new FormData();
+
+            data.append('name', form.querySelector('#product-name').value);
+            data.append('description', form.querySelector('#description').value);
+            data.append('price', form.querySelector('#product-price').value);
+            data.append('barcode', form.querySelector('#product-barcode').value);
+            data.append('stockCount', form.querySelector('#stock').value);
+            data.append('productCategory', form.querySelector('#product-category').value);
+            data.append('image', form.querySelector('#image-upload').files[0]);
+
+            fetch('/inventory/api', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()).then((data) => {
+                if (data.code === 200) {
+                    notify.success('Product successfully created/updated', 'Success')
+
+                    createProduct.close();
+                    inventory.fetchInventory();
+                    inventory.fetchInventoryStats();
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        });
+    })
 </script>
