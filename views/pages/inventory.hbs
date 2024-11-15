@@ -106,9 +106,6 @@
                             </span>
                         </th>
                         <th class="border-b bg-rooted"></th>
-                        <th class="border-b bg-rooted">
-                            <span class="w-max block pr-2">Type</span>
-                        </th>
                         <th class="border-b bg-rooted rounded-tr-md pr-4"></th>
                     </tr>
                 </thead>
@@ -340,16 +337,14 @@
                 const tr = document.createElement('tr');
                 tr.classList.add('odd:bg-gray-50', 'hover:bg-[#e0e6f1]');
                 tr.dataset.pid = product.id;
+                const stockValue = product.price * product.stockCount
                 tr.innerHTML = `
-                    <td class="whitespace-nowrap px-4 py-2">
-                        <input type="checkbox" class="form-checkbox h-4 w-4 text-rooted" />
+                    <td class="whitespace-nowrap px-4 py-2 pl-4 font-medium text-gray-900">
+                        <button id="${product.id}" class="pl-2">${product.id}</button>
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 font-medium text-gray-900"><button id="${product.id}">${product.id}</button></td>
                     <td id="product-name" class="hover:cursor-pointer font-semibold whitespace-nowrap px-4 py-2 pl-0 text-gray-700 hover:text-rooted hover:underline">${product.name}</td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${formatCurrency(product.stockValue, '{{currency_code}}')}</td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${product.stockLevel}</td>
-                    <td id="stock-level" class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700"></td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700 capitalize">${product.type}</td>
+                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${formatCurrency(stockValue, '{{currency_code}}')}</td>
+                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${product.stockCount}</td>
                     <td>
                         <div class="relative">
                             <div class="inline-flex items-center overflow-hidden rounded-md border bg-white">

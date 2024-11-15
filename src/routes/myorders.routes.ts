@@ -1,7 +1,6 @@
 'use strict';
 
 import Orders from '../models/order';
-import OrderItems from '../models/order-item';
 import { cache } from '../utils/middleware';
 import express, { Request, Response } from 'express';
 
