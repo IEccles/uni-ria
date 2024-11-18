@@ -1,0 +1,24 @@
+<div>
+    <button id="create-order" class="border-2 bg-white border-invente text-invente hover:bg-invente hover:text-invente-foreground rounded-md p-2">Create</button>
+
+    <div id="order-create" class="hidden fixed top-0 left-0 w-screen h-screen bg-black/[.6] z-30">
+        <form
+            class="fixed top-[50vh] left-[50vw] bg-white w-[90vw] md:w-[80vw] lg:w-[70vw] max-h-[80vh] overflow-auto rounded-md [transform:translate(-50%,-50%);]">
+            <div class="flex flex-col gap-6">
+                <div class="flex place-items-center justify-between p-6 border-b">
+                    <h2 id="modal_title" class="text-2xl">Create Order</h2>
+                    <button type="button" id="order-create-close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-black/[.6]">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="flex flex-col gap-6"></div>
+            </div>
+        </form>
+    </div>
+</div>
