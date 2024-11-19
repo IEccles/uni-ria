@@ -36,6 +36,7 @@ module.exports = {
         'rooted-old': "#c7ccb9",
         'rooted-cream': "#f9f1cd"
       }
+      
     }
   },
   plugins: [],
