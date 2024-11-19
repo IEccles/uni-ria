@@ -112,7 +112,12 @@
         </div>
     </noscript>
 
-    <div class="preloader-container"><span class="preloader"></span></div>
+{{!-- Trying to style the Page Title and the Container to match the designs for the site --}}
+    <div class="preloader-container">
+        <span class="preloader">
+            <div class="color bg-rooted"></div>
+        </span>
+    </div>
 
     <div style="display: none;" class="!flex w-screen h-screen overflow-y-hidden">
         <div class="hidden md:block fixed md:static z-20">
@@ -121,7 +126,7 @@
                     <div class="px-4 py-6">
                         <div class="flex items-center space-x-4">
                             <img src="/assets/img/logo.png" class="w-32 h-32">
-                            <span class="hidden lg:block text-2xl font-serif" style="font-family: 'Monotype Corsiva';">
+                            <span class="hidden lg:block text-2xl text-rooted-cream font-serif" style="font-family: 'Monotype Corsiva';">
                                 Rooted Treasures
                             </span>
                         </div>
@@ -132,7 +137,7 @@
                             <li class="group relative">
                                 <a href="/dashboard"
                                     class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Dashboard') }} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
-                                    <svg class="w-5 group-hover:text-rooted {{#if (eq titleText 'Dashboard') }}text-rooted{{/if }}" xmlns="http://www.w3.org/2000/svg"
+                                    <svg class="w-5 group-hover:text-rooted {{#if (eq titleText 'Dashboard') }}text-rooted{{/if }}" xmlns="http://www.w3.org/2000/svg" 
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -149,7 +154,7 @@
                             <li class="group relative">
                                 <a href="/products"
                                     class="group flex gap-2 place-items-center rounded-md px-4 py-2 text-sm font-medium {{#if (eq titleText 'Products')}} text-gray-50 bg-rooted-green-light {{else}}text-gray-50 hover:bg-rooted-green-light hover:text-gray-950{{/if }}">
-                                    <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Products') }}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    <svg class="w-5 group-hover:text-rooted  {{#if (eq titleText 'Products') }}text-rooted{{/if}}" xmlns="http://www.w3.org/2000/svg" width="24" 
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
