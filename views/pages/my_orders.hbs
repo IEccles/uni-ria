@@ -1,12 +1,4 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details</title>
-</head>
-
-<body>
-
-    <div>
+<div>
     {{!-- Personal message to the user, detailing the orders in a list or form format maybe? --}}
     <h3 id="greeting" class="font-bold text-3xl"> Hi {{getUserName}}!</h3>
     <h4 id="subheading" >Take a look at your order history!</h4>
@@ -14,34 +6,97 @@
 
     {{!-- Adding in an order's Drop-Down List --}}
     {{!-- Showcases the user's orders and details the progress of the order --}}
-    <div class="max-w-md mx-auto mt-10">
+    <div id="my-orders" class="max-w-md mx-auto mt-10">
         <div class="bg-white shadow-md rounded-lg">
             <ul class="divide-y divide-gray-200">
             <li>
-                <a onclick="toggleDetails('order1')" class="flex justify-between items-center w-full p-4 text-left hover:bg-gray-100 focus:outline-none">
-                <span>Order #12345</span>
-                <span class="text-gray-500">Date: 30/10/2024</span>
-                </a>
+                <button class="flex justify-between items-center w-full p-4 text-left hover:bg-gray-100 focus:outline-none">
+                    <span>Order #12345</span>
+                    <span class="text-gray-500">Date: 30/10/2024</span>
+                </button>
                 {{!-- Making the hidden content appear --}}
-                <div id="order1">
+                <div id="order1" class="flex flex-col gap-6">
                     {{!-- Adding in an Order Progress Bar --}}
-                    <p class="flex justify-center items-center">Details about Order #12345...</p>
-                    <br>
-                    <p class="flex justify-center items-center">Your order is currently in TRANSIT</p>
-                    <br>
-                    <br>
-                    <p class="flex justify-center items-center">See your order's progress here:</p>
-                    <br>
+                    <p class="flex justify-center items-center mb-4">Details about Order #12345...</p>
+                    <p class="flex justify-center items-center mb-4">Your order is currently in TRANSIT</p>
+                    <p class="flex justify-center items-center mb-4">See your order's progress here:</p>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div class="bg-rooted h-2.5 rounded-full" style="width: 45%"></div>
+                        <div class="bg-rooted h-2.5 rounded-full" style="width: 45%"></div>
                     </div>
-                    <button onclick="toggleOrderDetails()" class="flex justify-center items-center px-4 py-2 bg-rooted-secondary text-white rounded-lg hover:bg-rooted-secondary.lighten(0.85).rgb().string()">
+                    <button id="order-details" class="flex justify-center items-center px-4 py-2 bg-rooted-secondary text-white rounded-lg hover:bg-rooted-secondary.lighten(0.85).rgb().string()">
                         View Order Details
                     </button> 
 
                 </div>
             </li>
             </ul>
-</body>
+        </div>
+    </div>
+</div>
+
+<script>
+    class MyOrders {
+        constructor() {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.modal = document.getElementById('my-orders');
+            })
+        }
+
+        renderEmpty() {
+            // tell the user they haven't ordered anything
+        }
+
+        renderError() {
+            // tell the user we cant process the request at this time
+        }
+
+        renderOrders(orders) {
+            for (let i = 0; i < orders.length; i++) {
+                const order = orders[i]
+
+                // render the orders in like above in the html
+
+                this.modal.querySelector('#order-details').addEventListener('click', () => {
+                    this.openOrder(order.id)
+                })
+            }
+        }
+
+        openOrder(id) {
+            fetch(`/myorders/api/s/${id}`)
+                .then(res => res.json())
+                .then((data) => {
+                    if (data.code === 200) {
+                        // Expand on the details or create a partial for a new modal to open that can show more details about the order
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                })
+        }
+
+        fetchOrders() {
+            fetch('/myorders/api')
+                .then(res => res.json())
+                .then((data) => {
+                    if (data.code === 200) {
+                        if (data.data.orders.length === 0) {
+                            this.renderEmpty();
+                        }
+
+                        this.renderOrders();
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                    this.renderError();
+                })
+        }
+
+        init() {
+            
+        }
+    }
+
+    const myOrders = new MyOrders();
+</script>
 
 

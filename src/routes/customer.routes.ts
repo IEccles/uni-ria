@@ -3,6 +3,7 @@
 import Customers from '../models/customer';
 import { cache } from '../utils/middleware';
 import express, { Request, Response } from 'express';
+import { Op } from 'sequelize';
 
 const router = express.Router();
 
@@ -70,6 +71,40 @@ router.get('/api/s/:id', cache('dynamic'), (req: Request, res: Response) => {
             })
         })
 });
+
+router.get('/api/search', cache('dynamic'), async (req: Request, res: Response) => {
+    const search = req.query.search as string;
+
+    const payload = {
+        attributes: ['id', 'firstName', 'surname']
+    }
+
+    if (search) {
+        payload['where'] = {
+            [Op.or]: [
+                {
+                    firstName: {
+                        [Op.like]: `%${search}%`
+                    }
+                },
+                {
+                    surname: {
+                        [Op.like]: `%${search}%`
+                    }
+                }
+            ]
+        }
+    }
+
+    const customers = await Customers.findAll(payload);
+
+    res.json({
+        code: 200,
+        details: {
+            customers: customers
+        }
+    })
+})
 
 router.post('/api', (req: Request, res: Response) => {
     const body = req.body;
