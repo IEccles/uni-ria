@@ -370,8 +370,6 @@
                     </td>
                 `
 
-                this.table.appendChild(tr);
-
                 tr.querySelector('#delete_product').addEventListener('click', (e) => {
                     e.preventDefault();
                     swal({
@@ -401,6 +399,8 @@
                         }
                     })
                 })
+
+                this.table.appendChild(tr);
             }
         }
 

@@ -15,7 +15,14 @@ import myOrders from './routes/myorders.routes';
 import inventory from './routes/inventory.routes';
 import orders from './routes/order.routes';
 
+import Customer from './models/customer';
+import Products from './models/product';
+import Order from './models/order';
 
+Order.belongsTo(Customer, { foreignKey: 'customerId', as: 'customer' });
+Customer.hasMany(Order, { foreignKey: 'customerId', as: 'orders' });
+Order.belongsToMany(Products, { through: 'OrderProducts', foreignKey: 'orderId', as: 'orderProducts' });
+Products.belongsToMany(Order, { through: 'OrderProducts', foreignKey: 'productId', as: 'orders' });
 // Load the favicon from the disk and store it in memory to reduce the number of disk reads
 // and to improve the performance of the application. This is done to reduce the number of disk
 // reads and to improve the performance of the application. The favicon is a small image that is

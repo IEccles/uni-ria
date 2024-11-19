@@ -32,18 +32,11 @@ module.exports = {
         'rooted-secondary': "#62370e",
         'rooted-lighter': Color(rooted_treasures).lighten(0.5).rgb().string(),
         'rooted-foreground': hex_inverse_bw(rooted_treasures),
-        'rooted-brown': "#62370e",
-        'rooted-green-light': "#dbf9b8",
-        'rooted-grey': "c7ccb9",
+        'rooted-light': "#dbf9b8",
+        'rooted-old': "#c7ccb9",
         'rooted-cream': "#f9f1cd"
       }
     }
   },
   plugins: [],
-  theme: {
-    fontFamily: {
-      'rooted-treasures-headings': "Monotype Corvisa",
-      'rooted-treasures-body': "Centruy"
-    }
-  }
 };
