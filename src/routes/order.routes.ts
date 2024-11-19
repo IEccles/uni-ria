@@ -25,7 +25,7 @@ router.get('/api', cache('dynamic'), (req: Request, res: Response) => {
             {
                 model: Customer,
                 as: 'customer',
-                attributes: ['id', 'name', 'email']
+                attributes: ['id', 'firstName', 'email']
             },
             {
                 model: Product,
@@ -61,12 +61,14 @@ router.get('/api', cache('dynamic'), (req: Request, res: Response) => {
                 }
             });
         }).catch((err) => {
+            console.error("Error occurred:", err); // Log the full error
             return res.status(500).json({
                 code: 500,
                 message: 'Internal server error',
                 error: err.message
             });
         });
+        
 });
 
 router.get('/api/stats', cache('dynamic'), async (req: Request, res: Response) => {
