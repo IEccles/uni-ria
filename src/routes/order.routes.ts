@@ -1,7 +1,8 @@
 'use strict';
 
 import Orders from '../models/order';
-import Customer from '../models/customer'
+import Customer from '../models/customer';
+import Product from '../models/product';
 
 import express, { Request, Response } from 'express';
 import { cache } from '../utils/middleware';
@@ -20,11 +21,19 @@ router.get('/api', cache('dynamic'), (req: Request, res: Response) => {
 
     const configs = {
         order: [['createdAt', 'DESC']],
-        include: [{
-            model: Customer,
-            as: 'customer',
-            attributes: ['id', 'name', 'email']
-        }]
+        include: [
+            {
+                model: Customer,
+                as: 'customer',
+                attributes: ['id', 'name', 'email']
+            },
+            {
+                model: Product,
+                as: 'orderProducts',
+                attributes: ['id', 'name', 'price'],
+                through: { attributes: [] } // Exclude the join table attributes
+            }
+        ]
     } as { [key: string]: number | object | string };
 
     if (query) {
@@ -87,6 +96,42 @@ router.get('/api/s/:id', cache('dynamic'), (req: Request, res: Response) => {
                     error: 'Order not found'
                 })
             }
+
+            return res.json({
+                code: 200,
+                data: {
+                    order: order
+                }
+            })
+        }).catch((err) => {
+            console.log(err)
+            return res.json({
+                code: 500,
+                error: 'Internal server error'
+            })
+        })
+})
+
+router.delete('/api/delete/:id', (req: Request, res: Response) => {
+    const id = req.params.id as string;
+
+    if (!id || id === '') {
+        return res.json({
+            code: 400,
+            error: 'ID is required'
+        })
+    }
+
+    Orders.findByPk(id)
+        .then(async (order) => {
+            if (order === null) {
+                return res.json({
+                    code: 404,
+                    error: 'Order not found'
+                })
+            }
+
+            await order.destroy();
 
             return res.json({
                 code: 200,

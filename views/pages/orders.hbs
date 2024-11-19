@@ -356,24 +356,23 @@
                     <td class="whitespace-nowrap px-4 py-2 pl-4 font-medium text-gray-900">
                         <button id="${order.id}" class="pl-2">${order.id}</button>
                     </td>
-                    <td id="product-name" class="hover:cursor-pointer font-semibold whitespace-nowrap px-4 py-2 pl-0 text-gray-700 hover:text-rooted hover:underline">${product.name}</td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${formatCurrency(stockValue, '{{currency_code}}')}</td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${product.stockCount}</td>
+                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.customer.firstName} ${order.customer.lastName}</td>
+                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.customer.email}</td>
+                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.total}</td>
                     <td>
                         <div class="relative">
                             <div class="inline-flex items-center overflow-hidden rounded-md border bg-white">
-                                <button id="view-single-${product.id}"
+                                <button id="view"
                                     class="border-e px-4 py-2 text-sm/none text-gray-600 hover:bg-gray-50 hover:text-gray-700">
                                     View
                                 </button>
-                                <button
-                                    data-product="${product.id}"
+                                <button id="edit"
                                     class="h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700 border-r">
                                     <span class="sr-only">Edit</span>
                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                 </button>
                                 {{#if (isUserAdmin)}}
-                                    <button id="delete_product" 
+                                    <button id="delete-order"
                                         class="h-full p-2 text-gray-600 hover:bg-red-50 hover:text-red-700"> 
                                         <span class="sr-only">Delete</span>
                                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
@@ -383,6 +382,35 @@
                         </div>
                     </td>
                 `
+            
+                tr.querySelector('#delete-order').addEventListener('click', () => {
+                    swal({
+                        title: "Are you sure?",
+                        text: "You are about to delete this order. This action cannot be undone!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            fetch(`/orders/api/delete/${order.id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }).then(res => res.json()).then((data) => {
+                                if (data.code === 200) {
+                                    this.fetchOrders();
+                                    this.fetchOrderStats();
+
+                                    notify.success('Order successfully deleted', 'Success')
+                                }
+                            }).catch((err) => {
+                                console.log(err)
+                                notify.error('Error deleting order', 'Error')
+                            })
+                        }
+                    })
+                })
             }
         }
 

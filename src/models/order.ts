@@ -4,16 +4,19 @@ import { Model } from 'sequelize';
 import sequelize, { DataTypes } from '../database';
 import { config as dotenv } from 'dotenv';
 
+import Customers from './customer';
+import Products from './product';
+
 dotenv();
 
 const Orders = (sequelize, DataTypes) => {
     class Orders extends Model {
         id: number;
-        customerId: number;
+        customerId: typeof Customers | number | null;
         total: number;
         deliveryDate: Date;
         timeSlot: Date;
-        products: { id: number, qty: number }[];
+        products: { id: typeof Products | number | null, qty: number }[];
         createdAt: Date;
         updatedAt: Date;
     }
