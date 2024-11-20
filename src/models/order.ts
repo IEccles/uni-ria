@@ -17,6 +17,7 @@ const Orders = (sequelize, DataTypes) => {
         deliveryDate: Date;
         timeSlot: Date;
         products: { id: typeof Products | number | null, qty: number }[];
+        user: number;
         createdAt: Date;
         updatedAt: Date;
     }
@@ -46,6 +47,9 @@ const Orders = (sequelize, DataTypes) => {
         products: {
             allowNull: false,
             type: DataTypes.JSON
+        },
+        user: {
+            type: DataTypes.INTEGER
         }
     }, {
         sequelize,

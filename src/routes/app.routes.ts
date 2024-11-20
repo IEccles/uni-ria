@@ -107,6 +107,50 @@ router.post('/login', (req: RequestWithSession, res: Response) => {
     });
 });
 
+router.post('/signup', (req: Request, res: Response) => {
+    const body = req.body;
+
+    if (!body.firstName || body.firstName === '' || !body.lastName || body.lastName === '') {
+        return res.json({
+            code: 400,
+            error: 'User name is required'
+        })
+    }
+
+    if (!body.email || body.email === '') {
+        return res.json({
+            code: 400,
+            error: 'Valid email is required'
+        })
+    }
+
+    if (!body.password || body.password === '') {
+        return res.json({
+            code: 400,
+            error: 'Valid password is required'
+        })
+    }
+
+    user.create({
+        email: body.email,
+        password: body.password,
+        firstName: body.firstName,
+        lastName: body.lastName,
+        roles: ['user']
+    }).then(() => {
+        return res.json({
+            code: 200,
+            details: 'User created successfully'
+        })
+    }).catch((err) => {
+        console.log(err)
+        return res.json({
+            code: 500,
+            error: 'Internal server error'
+        })
+    })
+});
+
 // This route is used to render teh offline page, used by the service worker to display an offline page
 // when the user is offline and tries to access the application. The offline page is a simple page that
 // displays a message to the user that they are offline and that they should check their internet connection.

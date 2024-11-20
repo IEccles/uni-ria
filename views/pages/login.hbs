@@ -70,31 +70,47 @@
                                 <label for="remember" class="text-gray-500 ">Remember me</label>
                             </div>
                         </div>
-                        <button id="forgot_password_btn" type="button" class="hidden sm:block text-sm font-medium text-rooted hover:underline ">Forgot
-                            password?</button>
+                        <button id="signup-btn" type="button" class="hidden sm:block text-sm font-medium text-rooted hover:underline ">Don't have an account? Signup</button>
                     </div>
 
                     <button type="submit"
                         class="w-full text-rooted-foreground bg-rooted hover:bg-rooted/[.9] focus:ring-4 focus:outline-none focus:ring-rooted font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Sign
                         in</button>
 
-                    <a href="#" class="block sm:hidden text-sm font-medium text-rooted hover:underline ">Forgot
-                            password?</a>
-
                     <ul class="text-red-400 list-disc ml-4 hidden" id="error">
                         <li>Invalid email or password</li>
                     </ul>
                 </form>
 
-                <form id="forgot_password" class="space-y-4 md:space-y-6 hidden">
+                <form id="signup" class="space-y-4 md:space-y-6 hidden">
                     <button id="return" class="sm:block text-sm font-medium text-rooted hover:underline">Back</button>
-                    <h2>Please enter the associated Email of your account below and we'll send you a reset link</h2>
-                    <div>
-                        <label for="forgot_email" class="block mb-2 text-sm font-medium text-gray-900 ">Email
+                    <h2>Signup</h2>
+                    <p>Password must be at least 8 characters, contain 1 upper case letter and contain 2 at least 2 digits</p>
+                    <div class="flex flex-col">
+                        <div class="flex justify-between">
+                            <div class="flex flex-col">
+                                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900">First Name</label>
+                                <input type="text" id="first-name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
+                                    placeholder="John">        
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
+                                <input type="text" id="last-name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
+                                    placeholder="Doe">
+                            </div>
+                        </div>
+                        <label for="signup-email" class="block mb-2 text-sm font-medium text-gray-900 ">Email
                             Address</label>
-                        <input type="email" id="forgot_email"
+                        <input type="email" id="signup-email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
                             placeholder="name@{{systemDomain}}">
+
+                        <label for="signup-password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                        <input type="password" id="signup-password"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
+                            placeholder="*****">
                     </div>
                     <button type="submit"
                         class="w-full text-rooted-foreground bg-rooted hover:bg-rooted/[.9] focus:ring-4 focus:outline-none focus:ring-rooted font-medium rounded-lg text-sm px-5 py-2.5 text-center">Continue</button>
@@ -235,40 +251,42 @@
                 });
         });
 
-        const forgot_password = document.getElementById('forgot_password_btn')
-        const forgot_modal = document.getElementById('forgot_password')
+        const signupBtn = document.getElementById('signup-btn')
+        const signup = document.getElementById('signup')
         const back = document.getElementById('return')
 
-        forgot_password.addEventListener('click', (e) => {
+        signupBtn.addEventListener('click', (e) => {
             e.preventDefault();
             form.classList.add('hidden')
-            forgot_modal.classList.remove('hidden')
+            signup.classList.remove('hidden')
         })
 
         back.addEventListener('click', (e) => {
             e.preventDefault();
             form.classList.remove('hidden')
-            forgot_modal.classList.add('hidden')
+            signup.classList.add('hidden')
         })
 
-        forgot_modal.addEventListener('submit', (e) => {
+        signup.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = forgot_modal.querySelector('#forgot_email').value
-
-            fetch('/forgot', {
+            fetch('/signup', {
                 method: 'POST',
                 body: JSON.stringify({
-                    email: email
+                    firstName: signup.querySelector('#first-name').value,
+                    lastName: signup.querySelector('#last-name').value,
+                    email: signup.querySelector('#signup-email').value,
+                    password: signup.querySelector('#signup-password').value
                 }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.json()).then((data) => {
                 if (data.code === 200) {
-                    notify.success('A reset password link has been sent to your provided email.', 'Success')
-                } else if (code === 404) {
-                    notify.error('No account associated with that email.', 'Error')
+                    notify.success('Account Successfully created!', 'Please login')
+                    signup.reset();
+                    signup.classList.add('hidden');
+                    form.classList.remove('hidden');
                 }
             }).catch((err) => {
                 console.log(err)
