@@ -1,3 +1,9 @@
+<script src=" https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js "></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tinymce@6.4.1/skins/ui/oxide/content.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.4.1/tinymce.min.js"></script>
+<script src="/assets/js/base64.js"></script>
+
 <div>
     {{!-- Personal message to the user, encourage them to explore our product range --}}
     <h1 id="greeting" class="font-bold text-3xl"> Have a browse of latest and greatest Gardening Products!</h1>
@@ -5,22 +11,38 @@
 
 
 {{!-- Adding in code to allow for a Search and Sort functionality --}}
-    <div class="p-4 bg-gray-100 rounded-md shadow-md">
-        <div class="flex items-center justify-between mb-4">
-            <input
-            type="text"
-            placeholder="Search by name or category..."
-            class="p-2 border border-rooted-secondary bg-rooted-cream rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Search"
-            />
 
-        <select class="ml-4 p-2 border border-rooted-secondary bg-rooted-cream rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <option value="default">Sort by</option>
-        {{!-- Make sure to view this as a drop down value --}}
-        <option value="name">Name</option>
-        <option value="category">Category</option>
-        <option value="price">Price</option>
-        </select>
+    <div class="flex flex-col gap-3">
+        <div class="flex flex-wrap place-item-center gap-4 bg-rooted-light ml-4 p-2 border border-rooted rounded-md">
+
+            <select class="ml-4 p-2 border border-rooted-secondary bg-rooted-cream rounded-md focus:outline-none focus:ring-2 focus:ring-rooted">
+            <option value="default">Sort by</option>
+            {{!-- Make sure to view this as a drop down value --}}
+            <option value="name bg-white">Name</option>
+            <option value="category bg-white">Category</option>
+            <option value="price bg-white">Price</option>
+            </select>
+        </div>
+
+       <div class="relative grow order-[-1] w-96 md:w-auto md:order-none">
+        <label for="search-inventory" class="sr-only"> Search </label>
+
+        <span class="absolute inset-y-0 start-0 grid w-96 place-content-center pointer-events-none">
+            <button type="button" class="text-gray-600 hover:text-rooted">
+                <span class="sr-only">Search</span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-4 w-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </button>
+        </span>
+
+        <input type="text" id="search-inventory" placeholder="Search by ID, Name, SKU, Tags."
+            class="w-96 rounded-md border py-4 ps-12 pl-3 shadow-sm sm:text-base" />
+        </div>
+
     </div>
 
     {{!-- Returning the results from the search ot the filter --}}
