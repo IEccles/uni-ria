@@ -2,7 +2,7 @@
 
 import Orders from '../models/order';
 import Customer from '../models/customer';
-import Product from '../models/product';
+import Products from '../models/product';
 
 import express, { Request, Response } from 'express';
 import { cache } from '../utils/middleware';
@@ -27,12 +27,6 @@ router.get('/api', cache('dynamic'), (req: Request, res: Response) => {
                 as: 'customer',
                 attributes: ['id', 'name', 'email']
             },
-            {
-                model: Product,
-                as: 'orderProducts',
-                attributes: ['id', 'name', 'price'],
-                through: { attributes: [] } // Exclude the join table attributes
-            }
         ]
     } as { [key: string]: number | object | string };
 
@@ -89,7 +83,7 @@ router.get('/api/s/:id', cache('dynamic'), (req: Request, res: Response) => {
     }
 
     Orders.findByPk(id)
-        .then((order) => {
+        .then(async (order) => {
             if (order === null) {
                 return res.json({
                     code: 404,
@@ -97,10 +91,20 @@ router.get('/api/s/:id', cache('dynamic'), (req: Request, res: Response) => {
                 })
             }
 
+            const customer = await Customer.findByPk(order.customerId as number);
+            
+            const products = [];
+            for (let i = 0; i < order.products.length; i++) {
+                const product = await Products.findByPk(order.products[i].id as number);
+                products.push(product);
+            }
+
             return res.json({
                 code: 200,
                 data: {
-                    order: order
+                    order: order,
+                    products,
+                    customer
                 }
             })
         }).catch((err) => {

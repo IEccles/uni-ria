@@ -21,7 +21,7 @@ import Order from './models/order';
 
 Order.belongsTo(Customer, { foreignKey: 'customerId', as: 'customer' });
 Customer.hasMany(Order, { foreignKey: 'customerId', as: 'orders' });
-Order.belongsToMany(Products, { through: 'OrderProducts', foreignKey: 'orderId', as: 'orderProducts' });
+Order.belongsToMany(Products, { through: 'OrderProducts', foreignKey: 'orderId', as: 'orderItems' });
 Products.belongsToMany(Order, { through: 'OrderProducts', foreignKey: 'productId', as: 'orders' });
 // Load the favicon from the disk and store it in memory to reduce the number of disk reads
 // and to improve the performance of the application. This is done to reduce the number of disk
