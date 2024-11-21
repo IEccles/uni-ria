@@ -1,7 +1,23 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
 module.exports = {
   async up(queryInterface, Sequelize) {
+
+     // Define the base path where the images are stored
+     const imageBasePath = path.resolve(__dirname, 'images');
+
+     // Helper function to read an image file
+     const loadImage = (imageName) => {
+       const imagePath = path.join(imageBasePath, imageName);
+       return fs.existsSync(imagePath) ? fs.readFileSync(imagePath) : null;
+     };
+
+  
+     console.log(fs.existsSync(path.join(imageBasePath, 'secateurs.jpg'))); // Should return true if the file exists.
+     
     await queryInterface.bulkInsert('Products', [
       {
         name: 'Secateurs',
@@ -9,7 +25,7 @@ module.exports = {
         barcode: '1001010000',
         stockCount: 50,
         price:10.00,
-        image: null,
+        image:loadImage('Secateurs.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
