@@ -35,9 +35,7 @@ module.exports = {
         'rooted-light': "#dbf9b8",
         'rooted-grey': "#c7ccb9",
         'rooted-grey-light': Color(rooted-grey).lighten(0.5).rgb().string(),
-        'rooted-cream': "#f9f1cd",
-        'white': "#ffffff",
-        'black': "#000000"
+        'rooted-cream': "#f9f1cd"
       }
       
     }
