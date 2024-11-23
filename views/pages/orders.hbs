@@ -1,5 +1,9 @@
 <script src=" https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js "></script>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tinymce@6.4.1/skins/ui/oxide/content.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.4.1/tinymce.min.js"></script>
+<script src="/assets/js/base64.js"></script>
+
 <div class="flex flex-col gap-3">
     <div class="flex flex-wrap place-item-center gap-4">
 
@@ -228,7 +232,6 @@
                     this.updateActivePageButton();
                 });
 
-
                 this.searchInp.addEventListener('input', (event) => {
                     if (event.target.value.length >= 3) {
                         this.query = event.target.value;
@@ -240,7 +243,6 @@
                         }
                     }
                 });
-
 
                 this.countPerPageEl.addEventListener('change', (event) => {
                     this.page = 1;

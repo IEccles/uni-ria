@@ -6,19 +6,19 @@
 
     {{!-- Adding in an order's Drop-Down List --}}
     {{!-- Showcases the user's orders and details the progress of the order --}}
-    <div id="my-orders" class="max-w-md mx-auto mt-10">
+    {{!-- <div id="my-orders" class="max-w-md mx-auto mt-10"> --}}
         {{!-- Editing the ticket colour to match the colour scheme --}}
-        <div class="bg-white shadow-md rounded-lg">
+        {{!-- <div class="bg-white shadow-md rounded-lg">
             <ul class="divide-y divide-gray-200">
             <li>
                 <button class="flex justify-between items-center w-full p-4 text-left hover:bg-gray-100 focus:outline-none">
                     <span>Order #12345</span>
                     <span class="text-gray-500">Date: 30/10/2024</span>
-                </button>
+                </button> --}}
                 {{!-- Making the hidden content appear --}}
-                <div id="order1" class="flex flex-col gap-6">
+                {{!-- <div id="order1" class="flex flex-col gap-6"> --}}
                     {{!-- Adding in an Order Progress Bar --}}
-                    <p class="flex justify-center items-center mb-4">Details about Order #12345...</p>
+                    {{!-- <p class="flex justify-center items-center mb-4">Details about Order #12345...</p>
                     <p class="flex justify-center items-center mb-4">Your order is currently in TRANSIT</p>
                     <p class="flex justify-center items-center mb-4">See your order's progress here:</p>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
@@ -33,71 +33,104 @@
             </ul>
         </div>
     </div>
-</div>
+</div> --}}
+
 
 <script>
     class MyOrders {
-        constructor() {
-            document.addEventListener('DOMContentLoaded', () => {
-                this.modal = document.getElementById('my-orders');
-            })
-        }
-
-        renderEmpty() {
-            // tell the user they haven't ordered anything
-        }
-
-        renderError() {
-            // tell the user we cant process the request at this time
-        }
-
-        renderOrders(orders) {
-            for (let i = 0; i < orders.length; i++) {
-                const order = orders[i]
-
-                // render the orders in like above in the html
-
-                this.modal.querySelector('#order-details').addEventListener('click', () => {
-                    this.openOrder(order.id)
-                })
-            }
-        }
-
-        openOrder(id) {
-            fetch(`/myorders/api/s/${id}`)
-                .then(res => res.json())
-                .then((data) => {
-                    if (data.code === 200) {
-                        // Expand on the details or create a partial for a new modal to open that can show more details about the order
-                    }
-                }).catch((err) => {
-                    console.log(err)
-                })
-        }
-
-        fetchOrders() {
-            fetch('/myorders/api')
-                .then(res => res.json())
-                .then((data) => {
-                    if (data.code === 200) {
-                        if (data.data.orders.length === 0) {
-                            this.renderEmpty();
-                        }
-
-                        this.renderOrders();
-                    }
-                }).catch((err) => {
-                    console.log(err)
-                    this.renderError();
-                })
-        }
-
-        init() {
-            
-        }
+    constructor() {
+        document.addEventListener('DOMContentLoaded', () => {
+            this.modal = document.getElementById('my-orders');
+            this.fetchOrders();
+        });
     }
 
-    const myOrders = new MyOrders();
-</script>
+    renderEmpty() {
+        this.modal.innerHTML = `
+            <div class="text-center p-4 text-gray-500">
+                <p>You haven't placed any orders yet!</p>
+            </div>`;
+    }
 
+    renderError() {
+        this.modal.innerHTML = `
+            <div class="text-center p-4 text-red-500">
+                <p>We encountered an error while processing your request. Please try again later.</p>
+            </div>`;
+    }
+
+    renderOrders(orders) {
+        const ordersList = this.modal.querySelector('ul');
+        ordersList.innerHTML = ""; // Clear existing orders
+
+        orders.forEach(order => {
+            const orderElement = document.createElement('li');
+            orderElement.innerHTML = `
+                <button class="flex justify-between items-center w-full p-4 text-left hover:bg-gray-100 focus:outline-none">
+                    <span>Order #${order.id}</span>
+                    <span class="text-gray-500">Date: ${new Date(order.deliveryDate).toLocaleDateString()}</span>
+                </button>
+                <div id="order${order.id}" class="hidden flex flex-col gap-6">
+                    <p class="flex justify-center items-center mb-4">Order Total: $${order.total}</p>
+                    <p class="flex justify-center items-center mb-4">Delivery Date: ${new Date(order.deliveryDate).toLocaleDateString()}</p>
+                    <p class="flex justify-center items-center mb-4">Your order is currently in TRANSIT</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 45%"></div>
+                    </div>
+                    <button class="flex justify-center items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-400"
+                            onclick="myOrders.openOrder(${order.id})">
+                        View Order Details
+                    </button>
+                </div>
+            `;
+
+            // Add click event to toggle order details
+            orderElement.querySelector('button').addEventListener('click', () => {
+                const details = orderElement.querySelector(`#order${order.id}`);
+                details.classList.toggle('hidden');
+            });
+
+            ordersList.appendChild(orderElement);
+        });
+    }
+
+    openOrder(id) {
+        fetch(`/myorders/api/s/${id}`)
+            .then(res => res.json())
+            .then((data) => {
+                if (data.code === 200) {
+                    alert(`Order Details for #${id}: ${JSON.stringify(data.data)}`);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                alert('Failed to fetch order details.');
+            });
+    }
+
+    fetchOrders() {
+        fetch('/myorders/api')
+            .then(res => res.json())
+            .then((data) => {
+                if (data.code === 200) {
+                    if (data.data.orders.length === 0) {
+                        this.renderEmpty();
+                    } else {
+                        this.renderOrders(data.data.orders);
+                    }
+                } else {
+                    this.renderError();
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                this.renderError();
+            });
+    }
+}
+
+// Initialize the MyOrders class
+const myOrders = new MyOrders();
+
+</script>
 
