@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/assets/css/style.min.css">
 </head>
 
-<body class="bg-rooted-light" style="background-image: src=/assets/img/rootedBanner.png"> 
+<body class="bg-rooted-light bg-cover bg-no-repeat bg-center min-h-screen" 
+      style="background-image: url('/assets/img/rootedBanner.png'); background-size: cover;">
 
     {{!-- 
         Because we have a strict CORS policy we can create a cool effect where
@@ -42,9 +43,9 @@
 
     {{!-- Adding the logo into the login page --}}
 
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-4 bg-rooted-secondary w-full h-auto">
         <img src="/assets/img/logo.png" class="w-32 h-32">
-        <span class="hidden lg:block text-2xl text-rooted-secondary font-serif" style="font-family: 'Monotype Corsiva';">
+        <span class="hidden lg:block text-4xl text-rooted-cream font-serif" style="font-family: 'Monotype Corsiva';">
             Rooted Treasures
         </span>
     </div>
@@ -60,13 +61,13 @@
                         <label for="email" class="block mb-2 text-sm font-medium text-rooted-secondary ">Email
                             Address</label>
                         <input type="email" id="email"
-                            class="bg-gray-50 border border-gray-300 text-rooted-secondary sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
+                            class="bg-rooted-grey border border-gray-300 text-rooted-secondary sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
                             placeholder="name@{{systemDomain}}" required="">
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-rooted-secondary ">Password</label>
                         <input type="password" id="password" placeholder="••••••••"
-                            class="bg-gray-50 border border-gray-300 text-rooted-secondary sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
+                            class="bg-rooted-grey border border-gray-300 text-rooted-secondary sm:text-sm rounded-lg focus:ring-rooted focus:border-rooted block w-full p-2.5 "
                             required="">
                     </div>
                     <div id="twofa" class="!mt-0">
@@ -129,7 +130,7 @@
             </div>
         </div>
     </section>
-
+ 
 
 </body>
 
