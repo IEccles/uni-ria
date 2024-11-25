@@ -32,8 +32,6 @@
             <input type="text" id="search-orders" placeholder="Search by ID, Name, SKU, Tags."
                 class="w-full rounded-md border py-2.5 ps-10 pl-2 shadow-sm sm:text-sm" />
         </div>
-
-        {{!-- {{> inventory/create }} --}}
         
     </div>
 
@@ -358,7 +356,7 @@
                     <td class="whitespace-nowrap px-4 py-2 pl-4 font-medium text-gray-900">
                         <button id="${order.id}" class="pl-2">${order.id}</button>
                     </td>
-                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.customer.firstName} ${order.customer.lastName}</td>
+                    <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.customer.firstName} ${order.customer.surname}</td>
                     <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.customer.email}</td>
                     <td class="whitespace-nowrap px-4 py-2 pl-0 text-gray-700">${order.total}</td>
                     <td>
@@ -413,6 +411,8 @@
                         }
                     })
                 })
+
+                this.table.append(tr)
             }
         }
 
@@ -459,7 +459,7 @@
                     if (data.code === 200) {
                         this.emptyTable();
 
-                        if (data.data.products.length === 0) {
+                        if (data.data.orders.length === 0) {
                             this.renderEmpty();
                             return;
                         }
