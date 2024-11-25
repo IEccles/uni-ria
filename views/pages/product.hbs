@@ -7,222 +7,72 @@
 <div>
     {{!-- Personal message to the user, encourage them to explore our product range --}}
     <h1 id="greeting" class="font-bold text-3xl"> Have a browse of latest and greatest Gardening Products!</h1>
-    <h2 id="" ></h2>
 </div>
 
 <br>
 
-{{!-- Adding in code to allow for a Search and Sort functionality --}}
-<div class="SearchSort-Container">
-    <div class="flex flex-col gap-3">
-        <!-- Flex container for Dropdown and Search Bar -->
-        {{!-- Formatting this to be within a light green (from the Colour Palette) container --}}
-        <div class="flex items-center gap-4 bg-rooted-light ml-4 p-2 border border-rooted rounded-md">
-            <!-- Dropdown options and formatting -->
-            <select class="p-2 border border-rooted-secondary bg-rooted-cream rounded-md focus:outline-none focus:ring-2 focus:ring-rooted">
-                <option value="default">Sort by</option>
-                <option value="name">Name</option>
-                <option value="category">Category</option>
-                <option value="price">Price</option>
-            </select>
-
-            <!-- Search Bar and formatting-->
-            <div class="relative grow order-[-1] w-[600px] md:w-auto md:order-none">
-                <label for="search-inventory" class="sr-only">Search</label>
-
-                <span class="absolute inset-y-0 left-0 grid w-10 place-content-center pointer-events-none">
-                    <button type="button" class="text-gray-600 hover:text-rooted">
-                        <span class="sr-only">Search</span>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="h-4 w-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </button>
-                </span>
-
-                <input type="text" id="search-inventory" placeholder="Search by ID, Name, SKU, Tags."
-                class="w-full rounded-md border border-rooted-secondary focus:outline-none focus:ring-2 focus:ring-rooted py-2.5 ps-10 pl-2 shadow-sm sm:text-sm"/>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-    {{!-- Returning the results from the search ot the filter --}}
-    <div class="results">
-        {{#each products}}
-        <div class="p-2 border-b border-gray-300" data-category="{{this.category}}" data-price="{{this.price}}">
-            <div><strong>{{this.name}}</strong></div>
-            <div>{{this.category}}</div>
-            <div>£{{this.price}}</div>
-        </div>
-        {{/each}}
-    </div>
+<div class="mt-6 flex w-full p-6 mb-4">
+    <h3 class="text-xl font-semibold">Product</h3>
     
-    {{!-- Adding in the JavaScript to carry out the functionality of the Search and Sort
-    This to potentially be sorted in the backend? --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.querySelector('input[aria-label="Search"]');
-        const sortSelect = document.querySelector('select');
-        const resultsContainer = document.querySelector('.results');
-
-        searchInput.addEventListener('input', filterResults);
-        sortSelect.addEventListener('change', sortResults);
-
-    function filterResults() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const results = resultsContainer.querySelectorAll('div[data-category]');
-
-        results.forEach(result => {
-        const name = result.querySelector('strong').textContent.toLowerCase();
-        const category = result.dataset.category.toLowerCase();
-
-        const matchesSearch = name.includes(searchTerm) || category.includes(searchTerm);
-        result.style.display = matchesSearch ? 'block' : 'none';
-    });
-    }
-
-        function sortResults() {
-            const sortBy = sortSelect.value;
-            const results = Array.from(resultsContainer.querySelectorAll('div[data-category]'));
-
-            results.sort((a, b) => {
-            if (sortBy === 'name') {
-                return a.querySelector('strong').textContent.localeCompare(b.querySelector('strong').textContent);
-            } else if (sortBy === 'category') {
-                return a.dataset.category.localeCompare(b.dataset.category);
-            } else if (sortBy === 'price') {
-                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
-            }
-            return 0; // Default case
-    });
-
-        
-        resultsContainer.innerHTML = '';
-        results.forEach(result => resultsContainer.appendChild(result));
-    }
-    });
-
-    </script>
-
-
-    <div class="mt-6 flex w-full p-6 mb-4">
-        <h3 class="text-xl font-semibold">Recommended for You</h3>
-        {{!-- Image/product carousel of 'Recommended for You' products --}}
-        <div id="carousel-container">
-            {{!-- Adding in the logic to begin creating a Carousel of images - want to explore possibility of Random number generator
-            to get random id numbers from the database and add those into the Carousel. --}}
-            <script>
-                class Dashboard {
-                    constructor() {
-                        document.addEventListener('DOMContentLoaded', () => {
-                            this.greeting = document.getElementById('greeting');
-                            this.currentHour = new Date().getHours();
-
-                            this.carousel_container = document.getElementById('carousel-container');
-
-                            this.carousel = this.carousel.bind(this);
-                            this.init = this.init.bind(this);
-
-
-                            this.init();
-                        })
-                    }
-                    // Carousel arrows going the wrong the way
-                    carousel() {
-                        const div = document.createElement('div');
-
-                        div.innerHTML = `
-                            <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-                                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                                    
-                                    <div class="duration-700 ease-in-out" data-carousel-item="active">
-                                        <img src="" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    
-                                    <div class="duration-700 ease-in-out" data-carousel-item>
-                                        <img src="" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    
-                                    <div class="duration-700 ease-in-out" data-carousel-item>
-                                        <img src="" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    
-                                    <div class="duration-700 ease-in-out" data-carousel-item>
-                                        <img src="" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    
-                                    <div class="duration-700 ease-in-out" data-carousel-item>
-                                        <img src="" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                </div>
-
-                                <div class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
-                                    <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-                                </div>
-
-                                <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 group-hover:bg-black/50 group-focus:ring-4 group-focus:ring-black group-focus:outline-none">
-                                        <svg class="w-4 h-4 text-black rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                                        </svg>
-                                        <span class="sr-only">Previous</span>
-                                    </span>
-                                </button>
-                                
-                                <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 group-hover:bg-black/50 group-focus:ring-4 group-focus:ring-black group-focus:outline-none">
-                                        <svg class="w-4 h-4 text-black rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                        </svg>
-                                        <span class="sr-only">Next</span>
-                                    </span>
-                                </button>
-                            </div>
-                        `
-
-                        this.carousel_container.appendChild(div)
-                    }
-
-                    init() {
-                        this.carousel();
-                    }
-                }
-
-                const dashboard = new Dashboard();
-            </script>
-            
-        </div>
-        {{!-- Using a random generator functionality to randomly acquire the recommended for you products --}}      
-    </div>
-
-    <div class="mt-6 flex w-full p-6 mb-4">
-        <h3 class="text-xl font-semibold">What's New</h3>
-        {{!-- Image/product carousel of the Newest Products --}}
-            <div id="carousel-inner" class="flex overflow-x-scroll snap-x snap-mandatory gap-4 py-4 px-2">
-            </div>
-    </div>
-
-
-    <div class="mt-6 flex w-full p-6 mb-4">
-        <h3 class="text-xl font-semibold">Top Products</h3>
-        {{!-- Image/product carousel of Most Popular Products --}}
-        <div id="carousel-container">
-        </div>
-    </div>
-
-
-
-
-
-
-
-
+    <div id="products" class="flex flex-col"></div>
 </div>
+
+<script>
+    class Products {
+        constructor() {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.products = document.getElementById('products');
+
+                this.fetchProducts = this.fetchProducts.bind(this);
+                this.renderProducts = this.renderProducts.bind(this);
+                this.renderError = this.renderError.bind(this);
+
+                this.fetchProducts();
+            })
+        }
+
+        renderProducts(products) {
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i]
+                const div = document.createElement('div');
+
+                div.innerHTML = `
+                    <div class="flex flex-col gap-6">
+                        <img src"${product.image}">
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="mb-4">Name: ${product.name}</p>
+                        <p class="mb-4">Price: ${formatCurrency(product.price, '{{currency_code}}')}</p>
+                        <button id="buy-now" class="text-gray-600 hover:text-rooted">Buy Now</button>
+                `
+
+                div.querySelector('#buy-now').addEventListener('click', () => {
+                    notify.success('Product has been reserved for 48 hours please wait for a payment link sent to your email', 'Success');
+                })
+
+                this.products.appendChild(div);
+            }
+        }
+
+        renderError() {
+            this.products.innerHTML = `
+                <h3 class="text-red-500 font-bold">Error fetching products</h3>
+            `
+        }
+
+        fetchProducts() {
+            fetch('/products/api')
+                .then(res => res.json())
+                .then((data) => {
+                    if (data.code === 200) {
+                        this.renderProducts(data.data.products);
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                    this.renderError();
+                })
+        }
+    }
+
+    const product = new Products();
+</script>
