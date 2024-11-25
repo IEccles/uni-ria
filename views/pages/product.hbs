@@ -38,12 +38,13 @@
 
                 div.innerHTML = `
                     <div class="flex flex-col gap-6">
-                        <img src"${product.image}">
+                        <img src"${product.image}" class="w-full h-auto">
                     </div>
                     <div class="flex flex-col">
                         <p class="mb-4">Name: ${product.name}</p>
                         <p class="mb-4">Price: ${formatCurrency(product.price, '{{currency_code}}')}</p>
                         <button id="buy-now" class="text-gray-600 hover:text-rooted">Buy Now</button>
+                    </div>
                 `
 
                 div.querySelector('#buy-now').addEventListener('click', () => {
