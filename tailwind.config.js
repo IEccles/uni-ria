@@ -37,7 +37,6 @@ module.exports = {
         'rooted-grey-light': Color(rooted-grey).lighten(0.5).rgb().string(),
         'rooted-cream': "#f9f1cd"
       }
-      
     }
   },
   plugins: [],
