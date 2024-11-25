@@ -25,7 +25,7 @@ router.get('/api', cache('dynamic'), (req: Request, res: Response) => {
             {
                 model: Customer,
                 as: 'customer',
-                attributes: ['id', 'firstName', 'email']
+                attributes: ['id', 'firstName', 'surname', 'email']
             },
         ]
     } as { [key: string]: number | object | string };
