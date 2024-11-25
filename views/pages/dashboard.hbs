@@ -14,6 +14,36 @@
         <div class="flex flex-col gap-3">
             <!-- Flex container for Dropdown and Search Bar -->
             {{!-- Formatting this to be within a light green (from the Colour Palette) container --}}
+            <div class="flex items-center gap-4 bg-rooted-light ml-4 p-2 border border-rooted rounded-md">
+                <!-- Dropdown options and formatting -->
+                <select class="p-2 border border-rooted-secondary bg-rooted-cream rounded-md focus:outline-none focus:ring-2 focus:ring-rooted">
+                    <option value="default">Sort by</option>
+                    <option value="name">Name</option>
+                    <option value="category">Category</option>
+                    <option value="price">Price</option>
+                </select>
+
+                <!-- Search Bar and formatting-->
+                <div class="relative grow order-[-1] w-[600px] md:w-auto md:order-none">
+                    <label for="search-inventory" class="sr-only">Search</label>
+
+                    <span class="absolute inset-y-0 left-0 grid w-10 place-content-center pointer-events-none">
+                        <button type="button" class="text-gray-600 hover:text-rooted">
+                            <span class="sr-only">Search</span>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-4 w-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </button>
+                    </span>
+
+                    <input type="text" id="search-inventory" placeholder="Search by ID, Name, SKU, Tags."
+                    class="w-full rounded-md border border-rooted-secondary focus:outline-none focus:ring-2 focus:ring-rooted py-2.5 ps-10 pl-2 shadow-sm sm:text-sm"/>
+                </div>
+
+            </div>
         </div>
     </div>
 
