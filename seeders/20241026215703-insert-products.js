@@ -1,31 +1,34 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Define the base path for your images
+    const imageBasePath = path.resolve(__dirname, 'images');
 
-     // Define the base path where the images are stored
-     const imageBasePath = path.resolve(__dirname, 'images');
+    // Helper function to read and convert an image to a Blob
+    const getImageBlob = (fileName) => {
+      const filePath = path.join(imageBasePath, fileName);
 
-     // Helper function to read an image file
-     const loadImage = (imageName) => {
-       const imagePath = path.join(imageBasePath, imageName);
-       return fs.existsSync(imagePath) ? fs.readFileSync(imagePath) : null;
-     };
+      // Ensure the file exists before trying to read it
+      if (!fs.existsSync(filePath)) {
+        throw new Error(`Image file not found: ${filePath}`);
+      }
 
-  
-     console.log(fs.existsSync(path.join(imageBasePath, 'secateurs.jpg'))); // Should return true if the file exists.
-     
-    await queryInterface.bulkInsert('Products', [
+      // Read the file and return it as a Buffer
+      return fs.readFileSync(filePath);
+    };
+
+    try {
+      // Add your products with images converted to Blob (Buffer)
+      await queryInterface.bulkInsert('Products', [
       {
         name: 'Secateurs',
         productCategory: 'Tools',
         barcode: '1001010000',
         stockCount: 50,
         price:10.00,
-        image:loadImage('Secateurs.PNG'),
+        image:getImageBlob('Secateurs.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -35,7 +38,7 @@ module.exports = {
         barcode: '1002010000',
         stockCount: 50,
         price:23.00,
-        image: null,
+        image: getImageBlob('Pruners.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -45,7 +48,7 @@ module.exports = {
         barcode: '1003010000',
         stockCount: 50,
         price:15.00,
-        image: null,
+        image: getImageBlob('Rake.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -55,7 +58,7 @@ module.exports = {
         barcode: '1004010000',
         stockCount: 50,
         price:11.50,
-        image: null,
+        image: getImageBlob('HandTrowel.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -65,7 +68,7 @@ module.exports = {
         barcode: '1005010000',
         stockCount: 50,
         price:10.00,
-        image: null,
+        image: getImageBlob('YardBrush.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -75,7 +78,7 @@ module.exports = {
         barcode: '1006010000',
         stockCount:50,
         price:42.00,
-        image: null,
+        image: getImageBlob('Shears.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -85,7 +88,7 @@ module.exports = {
         barcode:'1007010000',
         stockCount:50,
         price:17.00,
-        image: null,
+        image: getImageBlob('GrabNLift.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -95,7 +98,7 @@ module.exports = {
         barcode:'1008010000',
         stockCount:50,
         price:38.00,
-        image: null,
+        image: getImageBlob('BorderFork.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -105,7 +108,7 @@ module.exports = {
         barcode:'1009010000',
         stockCount:50,
         price:38.00,
-        image: null,
+        image: getImageBlob('DiggingSpade.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -115,7 +118,7 @@ module.exports = {
         barcode:'1010010000',
         stockCount:50,
         price:55.00,
-        image: null,
+        image: getImageBlob('LeafBlower.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -125,7 +128,7 @@ module.exports = {
         barcode:'2001010000',
         stockCount:100,
         price:1.29,
-        image: null,
+        image: getImageBlob('WhiteCosmos.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -135,7 +138,7 @@ module.exports = {
         barcode:'2002010000',
         stockCount:100,
         price:3.49,
-        image: null,
+        image: getImageBlob('CornflowerBlueDiadem.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -145,7 +148,7 @@ module.exports = {
         barcode:'2003010000',
         stockCount:100,
         price:0.99,
-        image: null,
+        image: getImageBlob('SwanGourd.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -155,7 +158,7 @@ module.exports = {
         barcode:'2004010000',
         stockCount:100,
         price:0.89,
-        image: null,
+        image: getImageBlob('BronzeDragonAntirrhium.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -165,7 +168,7 @@ module.exports = {
         barcode:'2005010000',
         stockCount:100,
         price:0.89,
-        image: null,
+        image: getImageBlob('MixedDahlias.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -175,7 +178,7 @@ module.exports = {
         barcode:'2006010000',
         stockCount:100,
         price:1.83,
-        image: null,
+        image: getImageBlob('CopperSwirlPoppy.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -185,7 +188,7 @@ module.exports = {
         barcode:'2007010000',
         stockCount:100,
         price:0.89,
-        image: null,
+        image: getImageBlob('DoubleMarigold.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -195,7 +198,7 @@ module.exports = {
         barcode:'2008010000',
         stockCount:100,
         price:0.89,
-        image: null,
+        image: getImageBlob('SunshotGoldSunflower.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -205,7 +208,7 @@ module.exports = {
         barcode:'2009010000',
         stockCount:100,
         price:0.89,
-        image: null,
+        image: getImageBlob('DoubleCascadePetunia.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -215,7 +218,7 @@ module.exports = {
         barcode:'2010010000',
         stockCount:100,
         price:0.89,
-        image: null,
+        image: getImageBlob('AvantGardeLaurentia.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -225,7 +228,7 @@ module.exports = {
         barcode:'3001010000',
         stockCount:5,
         price:399.00,
-        image: null,
+        image: getImageBlob('SingleEggChair.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -235,7 +238,7 @@ module.exports = {
         barcode:'3002010000',
         stockCount:5,
         price:799.00,
-        image: null,
+        image: getImageBlob('RecliningChairSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -245,7 +248,7 @@ module.exports = {
         barcode:'3003010000',
         stockCount:5,
         price:399.00,
-        image: null,
+        image: getImageBlob('TurinBistroSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -255,7 +258,7 @@ module.exports = {
         barcode:'3004010000',
         stockCount:5,
         price:999.00,
-        image: null,
+        image: getImageBlob('DoubleEggChair.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -265,7 +268,7 @@ module.exports = {
         barcode:'3005010000',
         stockCount:5,
         price:799.00,
-        image: null,
+        image: getImageBlob('BermudaWeave4SeatSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -275,7 +278,7 @@ module.exports = {
         barcode:'3006010000',
         stockCount:5,
         price:1899.00,
-        image: null,
+        image: getImageBlob('Montego6SeatSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -285,7 +288,7 @@ module.exports = {
         barcode:'3007010000',
         stockCount:5,
         price:699.00,
-        image: null,
+        image: getImageBlob('Lounger.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -295,7 +298,7 @@ module.exports = {
         barcode:'3008010000',
         stockCount:5,
         price:1399.00,
-        image: null,
+        image: getImageBlob('SienneMiniModularSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -305,7 +308,7 @@ module.exports = {
         barcode:'3009010000',
         stockCount:5,
         price:2399.00,
-        image: null,
+        image: getImageBlob('BermudaCornerFirePitSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -315,17 +318,17 @@ module.exports = {
         barcode:'3010010000',
         stockCount:5,
         price:1899.00,
-        image: null,
+        image: getImageBlob('BarcelonaLoungeSet.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name:'Lavendula',
+        name:'Lavandula',
         productCategory:'Plants',
         barcode:'4001010000',
         stockCount:15,
         price:14.00,
-        image: null,
+        image: getImageBlob('Lavandula.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -335,7 +338,7 @@ module.exports = {
         barcode:'4002010000',
         stockCount:15,
         price:16.00,
-        image: null,
+        image: getImageBlob('Leylandi.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -345,7 +348,7 @@ module.exports = {
         barcode:'4003010000',
         stockCount:15,
         price:28.00,
-        image: null,
+        image: getImageBlob('MagnoliaStellata.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -355,7 +358,7 @@ module.exports = {
         barcode:'4004010000',
         stockCount:15,
         price:14.00,
-        image: null,
+        image: getImageBlob('WhiteViburnum.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -365,7 +368,7 @@ module.exports = {
         barcode:'4005010000',
         stockCount:15,
         price:18.00,
-        image: null,
+        image: getImageBlob('Rosemary.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -375,7 +378,7 @@ module.exports = {
         barcode:'4006010000',
         stockCount:15,
         price:36.00,
-        image: null,
+        image: getImageBlob('Hydrangea.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -385,7 +388,7 @@ module.exports = {
         barcode:'4007010000',
         stockCount:15,
         price:11.00,
-        image: null,
+        image: getImageBlob('PinkSalvia.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -395,7 +398,7 @@ module.exports = {
         barcode:'4008010000',
         stockCount:15,
         price:16.00,
-        image: null,
+        image: getImageBlob('JapaneseAcer.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -405,7 +408,7 @@ module.exports = {
         barcode:'4009010000',
         stockCount:15,
         price:20.00,
-        image: null,
+        image: getImageBlob('SambucasBlackLace.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -415,15 +418,20 @@ module.exports = {
         barcode:'4010010000',
         stockCount:15,
         price:12.00,
-        image: null,
+        image: getImageBlob('PinkPurpleFoxglove.PNG'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
 
     ]);
+        console.log('Seed data inserted successfully!');
+          } catch (error) {
+          console.error('Error inserting seed data:', error);
+    }
   },
 
   async down(queryInterface, Sequelize) {
+    // Remove seeded data
     await queryInterface.bulkDelete('Products', null, {});
-  }
+  },
 };
